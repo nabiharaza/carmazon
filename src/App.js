@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import LeftFilterNavbar from './components/LeftFilterNavbar/LeftFilterNavbar';
 import './components/Navbar/Navbar.css';
 import './App.css';
-import Card from "./components/Card/Card";
+import Card from "./components/Card/Card"; // Change import to match your component name
+import { Grid, Pagination } from '@mui/material';
 
 function App() {
-  const [filters, setFilters] = useState({ make: '', model: ''});
+  const [filters, setFilters] = useState({ make: '', model: '', mileage: '', condition: '', state: '', city: '' });
   const [jsonData, setJsonData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(8); // Adjust the number of items per page as needed
+  const [totalPages, setTotalPages] = useState(1);
+
+  useEffect(() => {
+    fetchData();
+  }, [currentPage, filters]);
 
   // Function to handle filter changes
   const handleFilterChange = (name, value) => {
@@ -15,28 +23,43 @@ function App() {
       ...prevFilters,
       [name]: value
     }));
+    setCurrentPage(1); // Reset to first page when filters change
   };
 
   // Function to handle filter application
   const handleApplyFilters = () => {
-    // Fetch data based on filters
-    fetchData();
+    setCurrentPage(1); // Reset to first page when filters are applied
   };
 
-  const fetchData = async () => {
-    // Construct URL with filters
-    const queryString = new URLSearchParams(filters).toString();
+  const fetchData = async (page) => {
+    // Construct URL with filters and page parameter
+    let queryString = new URLSearchParams({
+      ...(filters.make && { make: filters.make }),
+      ...(filters.model && { model: filters.model }),
+      ...(filters.mileage && { mileage: filters.mileage }),
+      ...(filters.condition && { condition: filters.condition }),
+      ...(filters.state && { state: filters.state }),
+      ...(filters.city && { city: filters.city }),
+      page: page || 1 // Use the provided page or default to page 1
+    }).toString();
+
     const apiUrl = `https://auto.dev/api/listings?${queryString}`;
     console.log('API URL:', apiUrl);
+
     try {
-      // Make API request with filters
       const response = await fetch(apiUrl);
       const data = await response.json();
       console.log('Fetched JSON Data:', data);
-      setJsonData(data.records || []); // Ensure jsonData is an array
+      setJsonData(data.records || []);
+      // Calculate total pages based on totalCount from the response
+      setTotalPages(Math.ceil(data.totalCount / itemsPerPage));
     } catch (error) {
       console.error('Error fetching data:', error);
     }
+  };
+
+  const handleChangePage = (event, page) => {
+    fetchData(page); // Fetch data for the selected page
   };
 
   return (
@@ -50,13 +73,22 @@ function App() {
         />
         <div className="content">
           <h1>Hello, Car Lovers!</h1>
-          {/* Display applied filters */}
           <p>Applied Filters: {JSON.stringify(filters)}</p>
-          <div className="card-container">
-            {Array.isArray(jsonData) && jsonData.map((record, index) => (
-              <Card key={index} data={record} />
+          <Grid container spacing={3} justifyContent="center">
+            {jsonData.map((record, index) => (
+              <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                <Card data={record} />
+              </Grid>
             ))}
-          </div>
+          </Grid>
+          <Pagination
+            count={totalPages}
+            page={currentPage}
+            onChange={handleChangePage}
+            color="primary"
+            variant="outlined"
+            shape="rounded"
+          />
         </div>
       </div>
     </div>

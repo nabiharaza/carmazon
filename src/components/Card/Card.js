@@ -1,16 +1,16 @@
-import React from 'react';
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { Card, CardContent, CardMedia, Typography, Button } from '@mui/material';
+import './Card.css'; // Import the CSS file
 
 function CustomCard({ data }) {
-  const { vin, make, model, year, trim, photoUrls } = data;
+  const { vin, make, model, year, trim, photoUrls, price, state, city, mileage, dealerName } = data;
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card className="custom-card">
       <CardMedia
-        component="img"
-        height="140"
+        className="card-media"
         image={photoUrls[0]}
-        alt={`${make} ${model}`}
+        title={`${make} ${model}`}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -25,7 +25,23 @@ function CustomCard({ data }) {
         <Typography variant="body2" color="text.secondary">
           Trim: {trim}
         </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Price: {price}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          State: {state}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          City: {city}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Mileage: {mileage}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Dealer Name: {dealerName}
+        </Typography>
       </CardContent>
+      <Button className="details-button" variant="contained" color="primary">Details</Button>
     </Card>
   );
 }

@@ -1,8 +1,8 @@
 /* Card.css */
 .card {
   width: 300px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid #c0bfbf;
+  border-radius: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
 }
@@ -29,4 +29,48 @@
 
 .card-content p {
   margin: 5px 0;
+}
+
+.custom-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  transition: transform 0.3s ease;
+  border-radius: 20px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  border: 2px solid #e0e0e0; /* Border color and thickness */
+}
+
+.custom-card:hover {
+  transform: scale(1.05);
+}
+
+.card-media {
+  height: 0;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+  border-top-left-radius: 4px; /* Rounded corners for media */
+  border-top-right-radius: 20px;
+}
+
+.details-button {
+  background-color: #000; /* Black background color */
+  color: #fff; /* White text color */
+  border: none;
+  border-radius: 20px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.3s;
+}
+
+.details-button:hover {
+  background-color: #5d6064;
+}
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .custom-card {
+    width: 100%; /* Full width on smaller screens */
+    margin-bottom: 20px; /* Add margin between cards */
+  }
 }

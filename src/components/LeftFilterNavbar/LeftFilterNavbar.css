@@ -1,4 +1,12 @@
 /* LeftNavbar.css */
+.navbarTitle {
+  color: #ece9e9;
+  margin-bottom: 10px;
+}
+
+.filterGroup {
+  margin-bottom: 15px;
+}
 
 .left-navbar {
   background-color: #f5f5f5;
@@ -6,6 +14,7 @@
   width: 250px;
   height: 100vh; /* Full height */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Use a modern font */
 }
 
 .left-navbar h2 {
@@ -27,15 +36,60 @@
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 20px;
   font-size: 12px;
 }
 
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 12px;
+  width: 100%;
+  text-align: left; /* Align text left */
+}
+
+.dropdown-toggle::after {
+  content: "\25BE"; /* Unicode character for down arrow */
+  float: right;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 20px;
+  padding: 5px;
+  width: calc(100% - 10px);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.dropdown-menu label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: normal; /* Remove bold styling */
+}
+
+.dropdown-menu input {
+  margin-right: 5px;
+}
+
 button {
-  background-color: #007bff;
+  background-color: #1f1f1f;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 20px;
   padding: 10px 15px;
   cursor: pointer;
   font-size: 12px;
@@ -43,5 +97,5 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #5d6064;
 }
