@@ -1,0 +1,42 @@
+/* App.css */
+
+/* Set the overall layout to flex */
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+  width: 100%;
+}
+
+/* Main content */
+.main-content {
+  display: flex;
+  flex-grow: 1;
+}
+
+/* Left Filter Navbar */
+.left-navbar {
+  width: 15%;
+}
+
+/* Content */
+.content {
+  width: 85%;
+  padding: 20px;
+}
+
+/* Card container */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Display 4 cards per row */
+  grid-gap: 20px; /* Add gap between cards */
+}
+
+/* Card styles */
+.card {
+  /* Add styles for cards */
+}
