@@ -12,7 +12,7 @@ function CustomCard({ data }) {
         image={photoUrls[0]}
       >
          <Typography className="price-overlay" variant="h7">{price}</Typography>
-         <Typography className="make-model-overlay" variant="subtitle1">{make} {model}</Typography>
+         <Typography className="make-model-overlay" variant="subtitle1">{make} {model} {trim}</Typography>
       </CardMedia>
     <CardContent className="custom-card-content">
         <div className="card-details">

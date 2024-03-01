@@ -94,7 +94,9 @@
   margin-top: 10px;
 }
 
-
+.details-button.black:hover {
+  background-color: #424040;
+}
 .price-overlay {
   position: absolute;
   top: 10px; /* Adjust top position as needed */
@@ -115,7 +117,7 @@
   padding: 1px 10px; /* Add padding */
   border-radius: 4px; /* Rounded corners */
   color: white;
-  width: 90%; /* Adjust width as needed */
+  width: 95%; /* Adjust width as needed */
   text-align: center; /* Center the text */
   white-space: nowrap; /* Prevent wrapping */
   overflow: hidden; /* Hide overflow */
