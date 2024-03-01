@@ -6,12 +6,14 @@ function CustomCard({ data }) {
   const { make, model, vin, year, trim, price, state, city, mileage, dealerName, photoUrls } = data;
 
   return (
-    <Card className="custom-card">
-       <CardMedia
-          className="card-media"
-          image={photoUrls[0]}
-          title={`${make} ${model}`}>
-       </CardMedia>
+        <Card className="custom-card">
+      <CardMedia
+        className="card-media"
+        image={photoUrls[0]}
+      >
+         <Typography className="price-overlay" variant="h7">{price}</Typography>
+         <Typography className="make-model-overlay" variant="subtitle1">{make} {model}</Typography>
+      </CardMedia>
     <CardContent className="custom-card-content">
         <div className="card-details">
           <div className="detail-item">
@@ -22,11 +24,6 @@ function CustomCard({ data }) {
           <div className="detail-item">
             <Typography variant="body2" color="text.secondary">
               <strong>Year:</strong> {year}
-            </Typography>
-          </div>
-          <div className="detail-item">
-            <Typography variant="body2" color="text.secondary">
-              <strong>Price:</strong> <span className="highlighted-price price">{price}</span>
             </Typography>
           </div>
           <div className="detail-item">
