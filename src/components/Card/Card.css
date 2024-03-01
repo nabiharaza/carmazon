@@ -1,12 +1,13 @@
-/* Card.css */
-.card {
-  width: 300px;
-  border: 1px solid #c0bfbf;
-  border-radius: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-}
 
+.custom-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.1s ease;
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  border: 0.5px solid #333131; /* Border color and thickness */
+}
 .card-image {
   height: 200px;
   overflow: hidden;
@@ -19,7 +20,7 @@
 }
 
 .card-content {
-  padding: 10px;
+  padding: 5px;
 }
 
 .card-content h2 {
@@ -32,14 +33,23 @@
 }
 
 .custom-card {
+  background-color: #e9e9ea;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
   transition: transform 0.3s ease;
-  border-radius: 20px; /* Rounded corners */
+  border-radius: 2px; /* Rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  border: 2px solid #e0e0e0; /* Border color and thickness */
+  border: 0.5px solid #333131; /* Border color and thickness */
+}
+
+.custom-card-content {
+  background-color: #e9e9ea;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .custom-card:hover {
@@ -54,14 +64,12 @@
 }
 
 .details-button {
-  background-color: #000; /* Black background color */
-  color: #fff; /* White text color */
-  border: none;
+  background-color: #000;
+  color: #fff;
   border-radius: 20px;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 12px;
-  transition: background-color 0.3s;
+  padding: 6px 15px; /* Smaller padding */
+  font-size: 12px; /* Smaller font size */
+  margin-top: 10px;
 }
 
 .details-button:hover {
@@ -73,4 +81,13 @@
     width: 100%; /* Full width on smaller screens */
     margin-bottom: 20px; /* Add margin between cards */
   }
+}
+
+/* Style for the black details button */
+.details-button.black {
+  background-color: #000;
+  color: #fff;
+  border-radius: 20px;
+  font-size: 12px; /* Smaller font size */
+  margin-top: 10px;
 }

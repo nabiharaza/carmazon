@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
-import './LeftFilterNavbar.css'; // You can create a separate CSS file for styling
+import './LeftFilterNavbar.css';
 
-const LeftFilterNavbar = ({ filters, onFilterChange, onApplyFilters }) => {
-  const carMakes = ['Honda', 'Toyota', 'Hyundai', 'Ford', 'Chevrolet', 'Nissan', 'BMW', 'Mercedes-Benz']; // Add more car makes as needed
+const LeftFilterNavbar = ({ onApplyFilters }) => {
+  const carMakes = ['Honda', 'Toyota', 'Hyundai', 'Ford', 'Chevrolet', 'Nissan', 'BMW', 'Mercedes-Benz'];
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [localFilters, setLocalFilters] = useState({
+    make: [],
+    model: '',
+    mileage: '',
+    condition: '',
+    state: '',
+    city: '',
+    zipCode: ''
+  });
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
@@ -12,58 +21,77 @@ const LeftFilterNavbar = ({ filters, onFilterChange, onApplyFilters }) => {
   const handleMakeChange = (event) => {
     const { value, checked } = event.target;
     const updatedMakes = checked
-      ? [...filters.make, value]
-      : filters.make.filter(make => make !== value);
-    onFilterChange('make', updatedMakes);
+      ? [...localFilters.make, value]
+      : localFilters.make.filter(make => make !== value);
+    setLocalFilters(prevFilters => ({
+      ...prevFilters,
+      make: updatedMakes
+    }));
   };
 
   const handleModelChange = (event) => {
-    onFilterChange('model', event.target.value);
+    const { value } = event.target;
+    setLocalFilters(prevFilters => ({
+      ...prevFilters,
+      model: value
+    }));
   };
 
   const handleMileageChange = (event) => {
-    onFilterChange('mileage', event.target.value);
+    const { value } = event.target;
+    setLocalFilters(prevFilters => ({
+      ...prevFilters,
+      mileage: value
+    }));
   };
 
   const handleConditionChange = (event) => {
-    onFilterChange('condition', event.target.value);
+    const { value } = event.target;
+    setLocalFilters(prevFilters => ({
+      ...prevFilters,
+      condition: value
+    }));
   };
 
   const handleStateChange = (event) => {
-    onFilterChange('state', event.target.value);
+    const { value } = event.target;
+    setLocalFilters(prevFilters => ({
+      ...prevFilters,
+      state: value
+    }));
   };
 
   const handleCityChange = (event) => {
-    onFilterChange('city', event.target.value);
+    const { value } = event.target;
+    setLocalFilters(prevFilters => ({
+      ...prevFilters,
+      city: value
+    }));
   };
 
-  const constructQueryString = () => {
-    let queryString = '';
-    if (filters.make.length > 0) {
-      queryString += `make=${filters.make.join('&make=')}`;
-    }
-    if (filters.model) {
-      queryString += `${queryString ? '&' : ''}model=${filters.model}`;
-    }
-    // Add additional filters
-    if (filters.mileage) {
-      queryString += `${queryString ? '&' : ''}mileage=${filters.mileage}`;
-    }
-    if (filters.condition) {
-      queryString += `${queryString ? '&' : ''}condition=${filters.condition}`;
-    }
-    if (filters.state) {
-      queryString += `${queryString ? '&' : ''}state=${filters.state}`;
-    }
-    if (filters.city) {
-      queryString += `${queryString ? '&' : ''}city=${filters.city}`;
-    }
-    return queryString;
+  const handleZipCodeChange = (event) => {
+    const { value } = event.target;
+    setLocalFilters(prevFilters => ({
+      ...prevFilters,
+      zipCode: value
+    }));
+  };
+
+  const handleApplyFiltersClick = () => {
+    onApplyFilters(localFilters);
   };
 
   return (
     <div className="left-navbar">
       <h2>Search Filters</h2>
+       <div className="filter-group">
+        <input
+          type="text"
+          placeholder="Enter Zip Code"
+          value={localFilters.zipCode}
+          onChange={handleZipCodeChange}
+        />
+      </div>
       <div className="filter-group">
         <label>Make:</label>
         <div className="dropdown">
@@ -77,7 +105,7 @@ const LeftFilterNavbar = ({ filters, onFilterChange, onApplyFilters }) => {
                   <input
                     type="checkbox"
                     value={make}
-                    checked={filters.make.includes(make)}
+                    checked={localFilters.make.includes(make)}
                     onChange={handleMakeChange}
                   />
                   {make}
@@ -92,31 +120,29 @@ const LeftFilterNavbar = ({ filters, onFilterChange, onApplyFilters }) => {
         <input
           type="text"
           id="model"
-          value={filters.model}
+          value={localFilters.model}
           onChange={handleModelChange}
         />
       </div>
-      {/* Additional filters */}
       <div className="filter-group">
         <label htmlFor="mileage">Mileage:</label>
         <input
           type="text"
           id="mileage"
-          value={filters.mileage}
+          value={localFilters.mileage}
           onChange={handleMileageChange}
         />
       </div>
       <div className="filter-group">
-         <label htmlFor="condition">Condition:</label>
+        <label htmlFor="condition">Condition:</label>
         <select
           id="condition"
-          value={filters.condition}
+          value={localFilters.condition}
           onChange={handleConditionChange}
         >
           <option value="">Select Condition</option>
           <option value="new">New</option>
           <option value="used">Used</option>
-          <option value="both">Both</option>
         </select>
       </div>
       <div className="filter-group">
@@ -124,7 +150,7 @@ const LeftFilterNavbar = ({ filters, onFilterChange, onApplyFilters }) => {
         <input
           type="text"
           id="state"
-          value={filters.state}
+          value={localFilters.state}
           onChange={handleStateChange}
         />
       </div>
@@ -133,11 +159,11 @@ const LeftFilterNavbar = ({ filters, onFilterChange, onApplyFilters }) => {
         <input
           type="text"
           id="city"
-          value={filters.city}
+          value={localFilters.city}
           onChange={handleCityChange}
         />
       </div>
-      <button onClick={() => onApplyFilters(constructQueryString())}>Apply Filters</button>
+      <button onClick={handleApplyFiltersClick}>Apply Filters</button>
     </div>
   );
 };

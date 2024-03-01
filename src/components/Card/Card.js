@@ -1,49 +1,54 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardContent, CardMedia, Typography, Button } from '@mui/material';
 import './Card.css'; // Import the CSS file
 
 function CustomCard({ data }) {
-  const { vin, make, model, year, trim, photoUrls, price, state, city, mileage, dealerName } = data;
+  const { make, model, vin, year, trim, price, state, city, mileage, dealerName, photoUrls } = data;
 
   return (
     <Card className="custom-card">
-      <CardMedia
-        className="card-media"
-        image={photoUrls[0]}
-        title={`${make} ${model}`}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {make} {model}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          VIN: {vin}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Year: {year}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Trim: {trim}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Price: {price}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          State: {state}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          City: {city}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Mileage: {mileage}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Dealer Name: {dealerName}
-        </Typography>
+       <CardMedia
+          className="card-media"
+          image={photoUrls[0]}
+          title={`${make} ${model}`}>
+       </CardMedia>
+    <CardContent className="custom-card-content">
+        <div className="card-details">
+          <div className="detail-item">
+            <Typography variant="body2" color="text.secondary">
+              <strong>VIN:</strong> {vin}
+            </Typography>
+          </div>
+          <div className="detail-item">
+            <Typography variant="body2" color="text.secondary">
+              <strong>Year:</strong> {year}
+            </Typography>
+          </div>
+          <div className="detail-item">
+            <Typography variant="body2" color="text.secondary">
+              <strong>Price:</strong> <span className="highlighted-price price">{price}</span>
+            </Typography>
+          </div>
+          <div className="detail-item">
+            <Typography variant="body2" color="text.secondary">
+              <strong>City</strong> {city},{state}
+            </Typography>
+          </div>
+          <div className="detail-item">
+            <Typography variant="body2" color="text.secondary">
+              <strong>Mileage:</strong> {mileage}
+            </Typography>
+          </div>
+          <div className="detail-item">
+            <Typography variant="body2" color="text.secondary">
+              <strong>Dealer Name:</strong> {dealerName}
+            </Typography>
+          </div>
+        </div>
+      <Button className="details-button black" variant="contained" color="primary">Details</Button>
       </CardContent>
-      <Button className="details-button" variant="contained" color="primary">Details</Button>
     </Card>
   );
 }
 
-export default CustomCard;
+export default CustomCard
