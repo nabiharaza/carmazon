@@ -1,0 +1,125 @@
+.details-container {
+    display: flex;
+    flex-wrap: wrap;
+    /*justify-content: center;*/
+    /*align-items: flex-start;*/
+    /*margin-top: 1px;*/
+    /*flex-direction: column;*/
+    padding: 20px;
+    /*border: 2px solid #ad4040;*/
+
+}
+
+top-title-bar{
+    display: flex;
+    flex-direction: column;
+    padding: 20px; /* Adjust padding as needed */
+}
+.title {
+    margin-bottom: 30px;
+}
+.title h2 {
+    margin: 0;
+
+}
+
+.carousel-image {
+    width: 80%;
+    height: auto;
+    border: 2px solid #ccc; /* Add a border for better visibility */
+    border-radius: 8px; /* Optional: Add border radius for rounded corners */
+    object-fit: cover; /* Ensures the image covers the entire container */
+    align-content: center;
+}
+
+.images-container {
+    width: 50%; /* Adjust to match the width of the card container */
+    padding-right: 20px; /* Add padding only to the right side */
+    padding-left: 0; /* Remove left padding */
+    box-sizing: border-box; /* Include padding in the width calculation */
+    /*border: 2px solid #29ff8e;*/
+    float: left;
+}
+
+.card {
+    width: 20%;
+    height: auto;
+    background-color: #e7e5e5;
+    padding: 10px;
+    padding-left: 20px;
+    border-radius: 8px;
+    /*border: 2px solid #ccc;*/
+}
+
+.card-content {
+    font-size: 14px;
+}
+.tabs-container {
+    width: 100%;
+    text-align: left;
+    margin-top: 20px;
+    /*border: 2px solid rgba(50, 111, 203, 0.6);*/
+}
+
+.tabs {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    border: 2px solid #ccc;
+    overflow: hidden;
+}
+
+.tab {
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.tab.active {
+    background-color: #1f1f1f;
+    color: #fff;
+}
+
+.tab-content {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.tab-pane {
+    width: 100%;
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+.tab-pane.active {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.detail-icon {
+    width: 70px; /* Adjust icon size as needed */
+    height: 70px;
+    margin-right: 10px;
+}
+
+.detail-text {
+    margin: 0;
+}

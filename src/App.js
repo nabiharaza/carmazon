@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 // import AppRoutes from './router/router'; // Import the routes
-import { Grid, Pagination } from '@mui/material';
-import { fetchZipCodeCoordinates } from './service/service';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-
+import {Grid, Pagination} from '@mui/material';
+import {fetchZipCodeCoordinates} from './service/service';
+import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import LeftFilterNavbar from './components/LeftFilterNavbar/LeftFilterNavbar';
 import './components/Navbar/Navbar.css';
 import './App.css';
 import Card from "./components/Card/Card"; // Adjust this import to match your component name
 import DetailsPage from './pages/DetailsPage';
+
 function App() {
     const [jsonData, setJsonData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -78,47 +78,50 @@ function App() {
         fetchData(page);
     };
 
-return (
-  <Router>
-    <div className="App">
-      <Navbar />
-      <div className="main-content">
-        <LeftFilterNavbar onApplyFilters={handleApplyFilters} />
-        <div className="content">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <div>
-                  <h1>Hello, Car Lovers!</h1>
-                  <Grid container spacing={3} justifyContent="center">
-                    {jsonData.map((record, index) => (
-                      <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-                        {/* Use Link component to handle navigation */}
-                        <Link to={`/details/${record.vin}`}>
-                          <Card data={record} />
-                        </Link>
-                      </Grid>
-                    ))}
-                  </Grid>
-                  <Pagination
-                    count={totalPages}
-                    page={currentPage}
-                    onChange={handleChangePage}
-                    color="primary"
-                    variant="outlined"
-                    shape="rounded"
-                  />
+    return (
+        <Router>
+            <div className="App">
+                <Navbar/>
+                <div className="main-content">
+                    <LeftFilterNavbar onApplyFilters={handleApplyFilters}/>
+                    <div className="content">
+                        <Routes>
+                            <Route
+                                path="/"
+                                element={
+                                    <div>
+                                        <h1>Hello, Car Lovers!</h1>
+                                        <Grid container spacing={3} justifyContent="center">
+                                            {jsonData.map((record, index) => (
+                                                <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                                                    <Link to={`/details/${record.vin}`}>
+                                                        <Card data={record}/>
+                                                    </Link>
+                                                </Grid>
+                                            ))}
+                                        </Grid>
+                                        <Pagination
+                                            count={totalPages}
+                                            page={currentPage}
+                                            onChange={handleChangePage}
+                                            color="primary"
+                                            variant="outlined"
+                                            shape="rounded"
+                                        />
+                                    </div>
+                                }
+                            />
+                            <Route
+                                path="/details/:vin"
+                                element={<DetailsPage/>}
+                            />
+
+                        </Routes>
+                    </div>
                 </div>
-              }
-            />
-            <Route path="/details/:vin" element={<DetailsPage />} />
-          </Routes>
-        </div>
-      </div>
-    </div>
-  </Router>
-);
+            </div>
+        </Router>
+    );
 }
 
 export default App;
