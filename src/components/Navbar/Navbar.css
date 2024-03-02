@@ -1,35 +1,46 @@
 /* Navbar.css */
 .navbar {
-  background-color: #333;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Use a modern font */
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Use a modern font */
 }
 
 .left-filter {
-  margin-right: 20px; /* Adjust margin as needed */
-  /* Additional styling for left filter */
+    margin-right: 20px; /* Adjust margin as needed */
+    /* Additional styling for left filter */
 }
 
 .navbar-nav {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
+    list-style: none;
+    display: flex;
+    align-items: center;
 }
 
+
 .nav-item {
-  margin-right: 20px; /* Adjust margin as needed */
+    margin-right: 20px; /* Adjust margin as needed */
 }
 
 .nav-link {
-  color: #ece9e9;
-  text-decoration: none;
-  padding: 10px;
-  transition: background-color 0.3s;
+    color: white;
+    text-decoration: none;
 }
 
 .nav-link:hover {
-  background-color: #555;
+    background-color: #555;
+}
+
+.logo {
+    display: flex;
+    align-items: center; /* Align the logo vertically */
+}
+
+.logo img {
+    width: 50px; /* Adjust the width of the logo as needed */
+    height: 50px; /* Ensure height matches width for a circular shape */
+    border-radius: 50%; /* Make the logo round */
+    object-fit: cover; /* Ensure the image covers the circular area */
 }

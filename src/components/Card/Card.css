@@ -1,125 +1,140 @@
 
 .custom-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: transform 0.1s ease;
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  border: 0.5px solid #333131; /* Border color and thickness */
-  position: relative; /* Set position to relative */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.1s ease;
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 10px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border: 0.5px solid #333131; /* Border color and thickness */
+    position: relative; /* Set position to relative */
 }
+
 .card-image {
-  height: 200px;
-  overflow: hidden;
-  border-bottom: 1px solid #ccc;
+    height: 200px;
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
 }
 
 .card-image img {
-  width: 100%;
-  height: auto;
+    width: 100%;
+    height: auto;
 }
 
 .card-content {
-  padding: 5px;
+    padding: 5px;
 }
 
 .card-content h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
+    font-size: 18px;
+    margin-bottom: 10px;
 }
 
 .card-content p {
-  margin: 5px 0;
+    margin: 5px 0;
 }
 
 .custom-card {
-  background-color: #e9e9ea;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  transition: transform 0.3s ease;
-  border-radius: 2px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  border: 0.5px solid #333131; /* Border color and thickness */
+    background-color: #e9e9ea;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    transition: transform 0.3s ease;
+    border-radius: 2px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border: 0.5px solid #333131; /* Border color and thickness */
 }
 
 .custom-card-content {
-  background-color: #e9e9ea;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
+    background-color: #e9e9ea;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }
 
 .custom-card:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .card-media {
-  height: 0;
-  padding-top: 56.25%; /* 16:9 aspect ratio */
-  border-top-left-radius: 4px; /* Rounded corners for media */
-  border-top-right-radius: 20px;
-  position: relative; /* Set position to relative */
+    height: 200px;
+    height: 0;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+    border-top-left-radius: 4px; /* Rounded corners for media */
+    border-top-right-radius: 20px;
+    position: relative; /* Set position to relative */
 }
 
 .details-button {
-  background-color: #000;
-  color: #fff;
-  border-radius: 20px;
-  padding: 6px 15px; /* Smaller padding */
-  font-size: 12px; /* Smaller font size */
-  margin-top: 10px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 20px;
+    padding: 6px 15px; /* Smaller padding */
+    font-size: 12px; /* Smaller font size */
+    margin-top: 10px;
 }
 
 .details-button:hover {
-  background-color: #5d6064;
+    background-color: #5d6064;
 }
+
 /* Responsive Styling */
 @media (max-width: 768px) {
-  .custom-card {
-    width: 100%; /* Full width on smaller screens */
-    margin-bottom: 20px; /* Add margin between cards */
-  }
+    .custom-card {
+        width: 100%; /* Full width on smaller screens */
+        margin-bottom: 20px; /* Add margin between cards */
+        border-radius: 20px;
+    }
 }
 
 /* Style for the black details button */
 .details-button.black {
-  background-color: #000;
-  color: #fff;
-  border-radius: 20px;
-  font-size: 12px; /* Smaller font size */
-  margin-top: 10px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 20px;
+    font-size: 12px; /* Smaller font size */
+    margin-top: 10px;
 }
 
 .details-button.black:hover {
-  background-color: #424040;
+    background-color: #282626;
 }
+
 .price-overlay {
-  position: absolute;
-  top: 10px; /* Adjust top position as needed */
-  left: 10px; /* Adjust left position as needed */
-  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent white background */
-  padding: 5px 10px; /* Add padding */
-  border-radius: 20px; /* Rounded corners */
-  font-weight: bold;
-  color: white;
+    position: absolute;
+    top: 10px; /* Adjust top position as needed */
+    left: 10px; /* Adjust left position as needed */
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent white background */
+    padding: 5px 10px; /* Add padding */
+    border-radius: 20px; /* Rounded corners */
+    font-weight: bold;
+    color: white;
 }
 
 .make-model-overlay {
-  position: absolute;
-  bottom: 0px; /* Adjust bottom position as needed */
-  left: 50%; /* Center horizontally */
-  transform: translateX(-50%); /* Center horizontally */
-  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent white background */
-  padding: 1px 10px; /* Add padding */
-  border-radius: 4px; /* Rounded corners */
-  color: white;
-  width: 95%; /* Adjust width as needed */
-  text-align: center; /* Center the text */
-  white-space: nowrap; /* Prevent wrapping */
-  overflow: hidden; /* Hide overflow */
-  text-overflow: ellipsis; /* Add ellipsis for overflow text */
+    position: absolute;
+    bottom: 0px; /* Adjust bottom position as needed */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center horizontally */
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent white background */
+    padding: 1px 10px; /* Add padding */
+    border-radius: 4px; /* Rounded corners */
+    color: white;
+    width: 95%; /* Adjust width as needed */
+    text-align: center; /* Center the text */
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Add ellipsis for overflow text */
+}
+
+.logo {
+    margin-right: 20px; /* Adjust the margin as needed */
+}
+
+.logo img {
+    width: 50px; /* Adjust the width of the logo image as needed */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Ensure the image behaves as a block element */
 }

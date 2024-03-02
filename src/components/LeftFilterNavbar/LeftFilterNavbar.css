@@ -1,101 +1,147 @@
-/* LeftNavbar.css */
+.left-navbar {
+    width: 800px; /* Adjust the width as needed */
+    background-color: #7e6060;
+    padding: 20px;
+    transition: width 0.3s ease;
+}
+
+.left-navbar.collapsed {
+    width: 90px; /* Adjust the collapsed width as needed */
+}
+
+.navbar-toggle {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.burger {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 3px;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
 .navbarTitle {
-  color: #ece9e9;
-  margin-bottom: 10px;
+    color: #ece9e9;
+    margin-bottom: 10px;
 }
 
 .filterGroup {
-  margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .left-navbar {
-  background-color: #f5f5f5;
-  padding: 20px;
-  width: 250px;
-  height: 100vh; /* Full height */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Use a modern font */
+    background-color: #f5f5f5;
+    padding: 20px;
+    width: 200px;
+    height: 80vh; /* Full height */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Use a modern font */
 }
 
 .left-navbar h2 {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
 }
 
 .filter-group {
-  margin-bottom: 15px;
+    margin-bottom: 15px;
+    width: 80%;
 }
 
+.filter-group select,
 .filter-group label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    border-radius: 20px;
+    font-size: 12px;
 }
+
 
 .filter-group input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  font-size: 12px;
+    width: 80%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 12px;
 }
 
 .dropdown {
-  position: relative;
+    position: relative;
+    width: 90%;
+    border: 1px solid #ccc;
+    display: block;
+    font-weight: bold;
+    border-radius: 20px;
+    font-size: 12px;
 }
 
 .dropdown-toggle {
-  background-color: #fff;
-  color: #333;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  padding: 8px 12px;
-  cursor: pointer;
-  font-size: 12px;
-  width: 100%;
-  text-align: left; /* Align text left */
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 12px;
+    width: 100%;
+    text-align: left; /* Align text left */
 }
 
 .dropdown-toggle::after {
-  content: "\25BE"; /* Unicode character for down arrow */
-  float: right;
+    content: "\25BE"; /* Unicode character for down arrow */
+    float: right;
 }
 
 .dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-top: none;
-  border-radius: 20px;
-  padding: 5px;
-  width: calc(100% - 10px);
-  max-height: 200px;
-  overflow-y: auto;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 20px;
+    padding: 5px;
+    width: calc(100% - 10px);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1;
+    display: inline-flex;
+    flex-wrap: wrap; /* Allow items to wrap onto new lines */
+
 }
 
 .dropdown-menu label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: normal; /* Remove bold styling */
+    display: inline-flex; /* Display labels and checkboxes inline */
+    align-items: center; /* Align items vertically */
+    margin-right: 10px; /* Add some space between checkbox and text */
+    margin-bottom: 5px;
+    font-weight: normal; /* Remove bold styling */
 }
 
 .dropdown-menu input {
-  margin-right: 5px;
+    margin-right: 5px;
 }
 
 button {
-  background-color: #1f1f1f;
-  color: #fff;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 12px;
-  transition: background-color 0.3s;
+    background-color: #1f1f1f;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #5d6064;
+    background-color: #5d6064;
 }
