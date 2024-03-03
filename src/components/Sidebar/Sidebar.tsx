@@ -14,7 +14,8 @@ const Sidebar: React.FC<LeftFilterNavbarProps> = ({ onApplyFilters }) => {
         city: '',
         zipCode: '',
         latitude: 0,
-        longitude: 0
+        longitude: 0,
+        radius: 0
     });
     const [isNavbarCollapsed, setNavbarCollapsed] = useState(false);
 
@@ -71,70 +72,86 @@ const Sidebar: React.FC<LeftFilterNavbarProps> = ({ onApplyFilters }) => {
                 <div className="burger"></div>
             </div>
             <h2 className="navbarTitle">Search Filters</h2>
-            <div className="filter-group">
-                <input
-                    type="text"
-                    placeholder="Enter Zip Code"
-                    value={localFilters.zipCode}
-                    onChange={handleFieldChange('zipCode')}
-                />
-            </div>
-            <div className="filter-group">
-                <div className="dropdown">
-                    <button className="dropdown-toggle" onClick={toggleDropdown}>
-                        Make
-                    </button>
-                    {isDropdownOpen && (
-                        <div className="dropdown-menu">
-                            {carMakes.map(make => (
-                                <label key={make}>
-                                    <input
-                                        type="checkbox"
-                                        value={make}
-                                        checked={localFilters.make.includes(make)}
-                                        onChange={handleFieldChange('make')}
-                                    />
-                                    {make}
-                                </label>
-                            ))}
-                        </div>
-                    )}
+            <div>
+                <div className="filter-group">
+                    <input
+                        type="text"
+                        placeholder="Enter Zip Code"
+                        value={localFilters.zipCode}
+                        onChange={handleFieldChange('zipCode')}
+                    />
                 </div>
-            </div>
-            <div className="filter-group">
-                <input
-                    type="text"
-                    value={localFilters.model}
-                    onChange={handleFieldChange('model')}
-                    placeholder="Model"
-                />
-            </div>
-            <div className="filter-group">
-                <input
-                    type="text"
-                    value={localFilters.mileage}
-                    onChange={handleFieldChange('mileage')}
-                    placeholder="Mileage"
-                />
-            </div>
-            <div className="filter-group">
-                <select
-                    value={localFilters.condition}
-                    onChange={handleFieldChange('condition')}
-                    className="dropdown-toggle"
-                >
-                    <option value="">Condition</option>
-                    <option value="new">New</option>
-                    <option value="used">Used</option>
-                </select>
-            </div>
-            <div className="filter-group">
-                <input
-                    type="text"
-                    value={localFilters.state}
-                    onChange={handleFieldChange('state')}
-                    placeholder="State"
-                />
+                <div className="filter-group">
+                    <select
+                        value={localFilters.radius}
+                        onChange={handleFieldChange('radius')}
+                        className="dropdown-toggle"
+                    >
+                        <option value="">Radius</option>
+                        <option value="10">10</option>
+                        <option value="30">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="500">500</option>
+                    </select>
+                </div>
+                <div className="filter-group">
+                    <div className="dropdown">
+                        <button className="dropdown-toggle" onClick={toggleDropdown}>
+                            Make
+                        </button>
+                        {isDropdownOpen && (
+                            <div className="dropdown-menu">
+                                {carMakes.map(make => (
+                                    <label key={make}>
+                                        <input
+                                            type="checkbox"
+                                            value={make}
+                                            checked={localFilters.make.includes(make)}
+                                            onChange={handleFieldChange('make')}
+                                        />
+                                        {make}
+                                    </label>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
+                <div className="filter-group">
+                    <input
+                        type="text"
+                        value={localFilters.model}
+                        onChange={handleFieldChange('model')}
+                        placeholder="Model"
+                    />
+                </div>
+                <div className="filter-group">
+                    <input
+                        type="text"
+                        value={localFilters.mileage}
+                        onChange={handleFieldChange('mileage')}
+                        placeholder="Mileage"
+                    />
+                </div>
+                <div className="filter-group">
+                    <select
+                        value={localFilters.condition}
+                        onChange={handleFieldChange('condition')}
+                        className="dropdown-toggle"
+                    >
+                        <option value="">Condition</option>
+                        <option value="new">New</option>
+                        <option value="used">Used</option>
+                    </select>
+                </div>
+                <div className="filter-group">
+                    <input
+                        type="text"
+                        value={localFilters.state}
+                        onChange={handleFieldChange('state')}
+                        placeholder="State"
+                    />
+                </div>
             </div>
             <button onClick={handleApplyFiltersClick}>Apply Filters</button>
         </div>
