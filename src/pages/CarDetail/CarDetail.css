@@ -176,13 +176,16 @@
 }
 
 .price-drop-label {
-    display: inline-block;
-    margin-right: 10px;
+    /*display: inline-block;*/
+    margin-left: 15px;
+    margin-top: 4px;
     padding: 5px 10px;
-    background-color: yellow;
-    color: black;
+    background-color: #7df1b4;
+    color: #1f1f1f;
     font-size: 12px;
-    border-radius: 4px;
+    border-radius: 20px;
+    float: right;
+    right: 20px;
 }
 
 .detail-item {
@@ -198,4 +201,109 @@
 
 .detail-value {
     font-weight: normal; /* Make the value text non-bold */
+}
+
+/* CSS for small screens */
+@media (max-width: 576px) {
+    .details-page {
+        padding: 20px; /* Adjust padding for smaller screens */
+    }
+
+    .images-container {
+        width: 100%; /* Set width to full for small screens */
+        padding: 0; /* Remove padding */
+        margin-left: 0; /* Remove left margin */
+    }
+
+    .short-details-card {
+        width: 100%; /* Set width to full for small screens */
+        margin-left: 0; /* Remove left margin */
+    }
+}
+
+
+ CSS for medium screens
+@media (min-width: 576px) and (max-width: 768px) {
+    .details-page {
+        padding: 30px; /* Adjust padding for medium screens */
+    }
+
+    .images-container {
+        width: 60%; /* Set width to 50% for medium screens */
+    }
+
+    .short-details-card {
+        width: calc(30% - 20px); /* Set width to 50% minus margin for medium screens */
+        margin-left: 20px; /* Adjust left margin */
+    }
+
+    .carousel-image {
+        max-height: 500px; /* Set maximum height for images */
+    }
+}
+
+@media (min-width: 992px) {
+  .left-section {
+    width: 70%;
+  }
+
+  .right-section {
+    width: 30%;
+  }
+}
+ CSS for large screens
+@media (min-width: 768px) and (max-width: 992px) {
+    .details-page {
+        padding: 40px; /* Adjust padding for large screens */
+    }
+
+    .images-container {
+        width: 70%; /* Set width to 40% for large screens */
+    }
+
+    .short-details-card {
+        width: calc(30% - 20px); /* Set width to 30% minus margin for large screens */
+        margin-left: 20px; /* Adjust left margin */
+    }
+
+    .carousel-image {
+        max-height: 700px; /* Set maximum height for images */
+    }
+}
+
+/* CSS for extra large screens */
+/* CSS for extra large screens */
+@media (min-width: 992px) {
+    .details-page {
+        padding: 50px; /* Adjust padding for extra large screens */
+    }
+
+    .images-container {
+        width: 70%; /* Set width to 30% for extra large screens */
+    }
+
+    .short-details-card {
+        width: calc(25% - 30px); /* Set width to 25% minus margin for extra large screens */
+        margin-left: 30px; /* Adjust left margin */
+    }
+
+    .carousel-image {
+        max-height: 500px; /* Set maximum height for images */
+    }
+}
+
+/* iPad Landscape */
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  and (orientation: landscape) {
+    /* Your CSS rules for iPad landscape orientation */
+}
+
+/* iPad Portrait */
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  and (orientation: portrait) {
+    /* Your CSS rules for iPad portrait orientation */
 }

@@ -74,11 +74,9 @@ const CarDetail: React.FC = () => {
             </div>
             <div className="top-title-bar">
                 <div className="title-wrapper">
-                    {/*{record.isHot && <img src={hotlisting} alt="Hot" className="hot-icon"/>}*/}
-                    {/*{record.isHot && <span className="hot-label">Hot Listing</span>}*/}
-                    {/*{record.recentPriceDrop && <span className="price-drop-label">Price Drop</span>}*/}
                     <h2>{record.year} {record.make} {record.model}</h2>
                     {record.isHot && <span className="hot-label">Hot Listing</span>}
+                    {record.recentPriceDrop && <span className="price-drop-label">Price Drop</span>}
                 </div>
                 <div className="details">
                     <p>Price: {record.price} | Mileage: {record.mileage}</p>
