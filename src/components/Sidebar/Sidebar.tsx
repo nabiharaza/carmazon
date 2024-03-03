@@ -1,85 +1,62 @@
-import React, {useState} from 'react';
-import './LeftFilterNavbar.css';
+import React, { useState } from 'react';
+import './Sidebar.css';
+import { fetchZipCodeCoordinates } from '../../service/commonService';
 
-const LeftFilterNavbar = ({onApplyFilters}) => {
+const Sidebar: React.FC<LeftFilterNavbarProps> = ({ onApplyFilters }) => {
     const carMakes = ['Honda', 'Toyota', 'Hyundai', 'Ford', 'Chevrolet', 'Nissan', 'BMW', 'Mercedes-Benz'];
     const [isDropdownOpen, setDropdownOpen] = useState(false);
-    const [isCollapsed, setCollapsed] = useState(false);
-    const [localFilters, setLocalFilters] = useState({
+    const [localFilters, setLocalFilters] = useState<Filters>({
         make: [],
         model: '',
         mileage: '',
         condition: '',
         state: '',
         city: '',
-        zipCode: ''
+        zipCode: '',
+        latitude: 0,
+        longitude: 0
     });
     const [isNavbarCollapsed, setNavbarCollapsed] = useState(false);
+
     const toggleDropdown = () => {
         setDropdownOpen(!isDropdownOpen);
     };
 
-    const handleMakeChange = (event) => {
-        const {value, checked} = event.target;
-        const updatedMakes = checked
-            ? [...localFilters.make, value]
-            : localFilters.make.filter(make => make !== value);
+    const handleFieldChange = <K extends keyof Filters>(fieldName: K) => (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { type, value } = event.target;
+        let fieldValue: string | boolean | string[];
+        switch (type) {
+            case 'checkbox':
+                if (Array.isArray(localFilters[fieldName])) {
+                    fieldValue = (localFilters[fieldName] as string[]).includes(value)
+                        ? (localFilters[fieldName] as string[]).filter(item => item !== value)
+                        : [...(localFilters[fieldName] as string[]), value];
+                } else {                
+                    fieldValue = localFilters[fieldName] !== value ? value : '';
+                }
+                break;
+            default:
+                fieldValue = value;
+                break;
+        }
+        
         setLocalFilters(prevFilters => ({
             ...prevFilters,
-            make: updatedMakes
+            [fieldName]: fieldValue 
         }));
     };
 
-    const handleModelChange = (event) => {
-        const {value} = event.target;
-        setLocalFilters(prevFilters => ({
-            ...prevFilters,
-            model: value
-        }));
-    };
-
-    const handleMileageChange = (event) => {
-        const {value} = event.target;
-        setLocalFilters(prevFilters => ({
-            ...prevFilters,
-            mileage: value
-        }));
-    };
-
-    const handleConditionChange = (event) => {
-        const {value} = event.target;
-        setLocalFilters(prevFilters => ({
-            ...prevFilters,
-            condition: value
-        }));
-    };
-
-    const handleStateChange = (event) => {
-        const {value} = event.target;
-        setLocalFilters(prevFilters => ({
-            ...prevFilters,
-            state: value
-        }));
-    };
-
-    const handleCityChange = (event) => {
-        const {value} = event.target;
-        setLocalFilters(prevFilters => ({
-            ...prevFilters,
-            city: value
-        }));
-    };
-
-    const handleZipCodeChange = (event) => {
-        const {value} = event.target;
-        setLocalFilters(prevFilters => ({
-            ...prevFilters,
-            zipCode: value
-        }));
-    };
-
-    const handleApplyFiltersClick = () => {
-        onApplyFilters(localFilters);
+    const handleApplyFiltersClick = async () => {
+        if (localFilters.zipCode) {
+            const zipCodeCoordinates: Coordinates | null = await fetchZipCodeCoordinates(localFilters.zipCode);
+            if (zipCodeCoordinates) {
+                localFilters.latitude = zipCodeCoordinates.latitude;
+                localFilters.longitude = zipCodeCoordinates.longitude;
+            }
+            onApplyFilters(localFilters);
+        } else {
+            onApplyFilters(localFilters);
+        }
     };
 
     const toggleNavbar = () => {
@@ -99,7 +76,7 @@ const LeftFilterNavbar = ({onApplyFilters}) => {
                     type="text"
                     placeholder="Enter Zip Code"
                     value={localFilters.zipCode}
-                    onChange={handleZipCodeChange}
+                    onChange={handleFieldChange('zipCode')}
                 />
             </div>
             <div className="filter-group">
@@ -115,7 +92,7 @@ const LeftFilterNavbar = ({onApplyFilters}) => {
                                         type="checkbox"
                                         value={make}
                                         checked={localFilters.make.includes(make)}
-                                        onChange={handleMakeChange}
+                                        onChange={handleFieldChange('make')}
                                     />
                                     {make}
                                 </label>
@@ -128,7 +105,7 @@ const LeftFilterNavbar = ({onApplyFilters}) => {
                 <input
                     type="text"
                     value={localFilters.model}
-                    onChange={handleModelChange}
+                    onChange={handleFieldChange('model')}
                     placeholder="Model"
                 />
             </div>
@@ -136,14 +113,14 @@ const LeftFilterNavbar = ({onApplyFilters}) => {
                 <input
                     type="text"
                     value={localFilters.mileage}
-                    onChange={handleMileageChange}
+                    onChange={handleFieldChange('mileage')}
                     placeholder="Mileage"
                 />
             </div>
             <div className="filter-group">
                 <select
                     value={localFilters.condition}
-                    onChange={handleConditionChange}
+                    onChange={handleFieldChange('condition')}
                     className="dropdown-toggle"
                 >
                     <option value="">Condition</option>
@@ -155,7 +132,7 @@ const LeftFilterNavbar = ({onApplyFilters}) => {
                 <input
                     type="text"
                     value={localFilters.state}
-                    onChange={handleStateChange}
+                    onChange={handleFieldChange('state')}
                     placeholder="State"
                 />
             </div>
@@ -164,4 +141,4 @@ const LeftFilterNavbar = ({onApplyFilters}) => {
     );
 };
 
-export default LeftFilterNavbar;
+export default Sidebar;

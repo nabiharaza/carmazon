@@ -1,9 +1,4 @@
-.left-navbar {
-    width: 800px; /* Adjust the width as needed */
-    background-color: #7e6060;
-    padding: 20px;
-    transition: width 0.3s ease;
-}
+
 
 .left-navbar.collapsed {
     width: 90px; /* Adjust the collapsed width as needed */
@@ -40,8 +35,8 @@ h2 {
 .left-navbar {
     background-color: #f5f5f5;
     padding: 20px;
-    width: 200px;
-    height: 80vh; /* Full height */
+    width: 100%;
+    height: 95vh; /* Full height */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Use a modern font */
 }
@@ -53,7 +48,6 @@ h2 {
 
 .filter-group {
     margin-bottom: 15px;
-    width: 80%;
 }
 
 .filter-group select,
@@ -63,6 +57,7 @@ h2 {
     margin-bottom: 5px;
     border-radius: 20px;
     font-size: 12px;
+    width: 86%;
 }
 
 
@@ -76,7 +71,7 @@ h2 {
 
 .dropdown {
     position: relative;
-    width: 90%;
+    width: 86%;
     border: 1px solid #ccc;
     display: block;
     font-weight: bold;

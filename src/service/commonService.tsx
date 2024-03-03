@@ -1,4 +1,4 @@
-export async function fetchZipCodeCoordinates(zipCode) {
+export async function fetchZipCodeCoordinates(zipCode: string): Promise<Coordinates | null> {
   try {
     // Fetch data from the API
     const response = await fetch(`https://api.zippopotam.us/us/${zipCode}`);
@@ -8,7 +8,7 @@ export async function fetchZipCodeCoordinates(zipCode) {
     const latitude = parseFloat(data.places[0].latitude);
     const longitude = parseFloat(data.places[0].longitude);
 
-    return { latitude, longitude };
+    return {latitude, longitude};
   } catch (error) {
     console.error('Error fetching zip code coordinates:', error);
     return null;
