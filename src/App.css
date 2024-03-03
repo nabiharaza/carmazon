@@ -1,6 +1,4 @@
 /* App.css */
-
-
 .container {
     display: flex;
     flex-direction: column;
@@ -10,11 +8,4 @@
 .app-body {
     flex: 1;
     overflow-y: auto; 
-}
-
-/* Card container */
-.card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid: cards minimum width of 250px */
-    grid-gap: 20px; /* Add gap between cards */
 }

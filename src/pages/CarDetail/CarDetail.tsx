@@ -3,12 +3,12 @@ import { Link, useParams } from 'react-router-dom';
 import './CarDetail.css';
 import Carousel from 'react-material-ui-carousel';
 import { Button } from '@mui/material';
-// import distanceIcon from '../../assets/images/cartoad.png';
-// import clickoffIcon from '../images/origin.png';
-// import colorIcon from '../images/display_colour.png';
-// import bodyStyleIcon from '../images/display_style.png';
-// import bodyTypeIcon from '../images/body_type.png';
-// import backarrow from '../images/icons/back-arrow-icon.png';
+import distanceIcon from '../../assets/images/cartoad.png';
+import clickoffIcon from '../images/origin.png';
+import colorIcon from '../images/display_colour.png';
+import bodyStyleIcon from '../images/display_style.png';
+import bodyTypeIcon from '../images/body_type.png';
+import backarrow from '../images/icons/back-arrow-icon.png';
 // import hotlisting from '../images/icons/fire-flame.gif';
 
 interface Record {
@@ -124,7 +124,7 @@ const CarDetail: React.FC = () => {
             </div>
             <div className={`tab-pane ${activeTab === 'more-details' ? 'active' : ''}`}>
                 <div className="detail-item">
-                {/* <img src={distanceIcon} alt="Icon" className="detail-icon"/> */}
+                <img src={distanceIcon} alt="Icon" className="detail-icon"/>
                 <p className="detail-text">Distance From Origin: {record.distanceFromOrigin}</p>
                 </div>
                 <div className="detail-item">
