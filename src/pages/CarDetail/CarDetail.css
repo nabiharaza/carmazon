@@ -1,5 +1,6 @@
 .details-page {
-    position: relative; /* Ensure proper positioning of the back button */
+    padding: 30px 30px 90px 200px; /* Adjust padding as needed */
+    position: relative;
 }
 
 .back-button {
@@ -42,11 +43,17 @@
 .details-container {
     display: flex;
     flex-wrap: wrap;
-    padding: 20px;
 }
-
+.carousel-image {
+    width: 100%;
+    height: 100%; /* Set the height to 100% */
+    object-fit: cover; /* Ensure the image covers the entire container */
+    border: 2px solid #ccc; /* Add a border for better visibility */
+    border-radius: 8px; /* Optional: Add border radius for rounded corners */
+}
 .images-container {
-    width: 60%; /* Adjust to match the width of the card container */
+    width: 60%;
+    height: 100%;
     padding-right: 30px; /* Add padding only to the right side */
     padding-left: 0; /* Remove left padding */
     box-sizing: border-box; /* Include padding in the width calculation */
@@ -56,12 +63,12 @@
 }
 
 .short-details-card {
-    idth: 20%;
+    width: 25%;
     height: auto;
     background-color: #ffffff;
     padding: 20px;
     padding-left: 20px;
-    margin-left: 20px; /* Add margin-left to create a gap with the image carousel */
+    margin-left: 60px; /* Add margin-left to create a gap with the image carousel */
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for a modern look */
     transition: box-shadow 0.3s ease; /* Add transition for hover effect */
@@ -138,8 +145,8 @@
 }
 
 .detail-icon {
-    width: 70px; /* Adjust icon size as needed */
-    height: 70px;
+    width: 50px; /* Adjust icon size as needed */
+    height: 50px;
     margin-right: 10px;
 }
 
@@ -155,4 +162,40 @@
     margin-bottom: 10px;
     position: absolute;
     z-index: 1; /* Ensure the icon is above other elements */
+}
+
+.hot-label {
+    /*display: inline-block;*/
+    margin-left: 10px; /* Adjust margin as needed */
+    padding: 5px 10px;
+    background-color: red;
+    color: white;
+    font-size: 13px;
+    border-radius: 20px;
+    float: right; /* Align to the right */
+}
+
+.price-drop-label {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px 10px;
+    background-color: yellow;
+    color: black;
+    font-size: 12px;
+    border-radius: 4px;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Add margin between detail items */
+}
+
+.detail-label {
+    font-weight: bold; /* Make the label text bold */
+    margin-right: 5px; /* Add margin between label and value */
+}
+
+.detail-value {
+    font-weight: normal; /* Make the value text non-bold */
 }

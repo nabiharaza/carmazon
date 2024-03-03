@@ -3,12 +3,12 @@ import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 import './CardList.css'; // Import the CSS file
 
 const CustomCard: React.FC<CustomCardProps> = ({ data }) => {
-    const { make, model, vin, year, trim, price, state, city, mileage, dealerName, primaryPhotoUrl } = data;
+    const { make, model, vin, year, trim, price, state, city, mileage, dealerName, photoUrls } = data;
     return (
         <div className='custom-card'>
             <div className='card-media'>
                 <Typography className="price-overlay" variant="h6">{price}</Typography>
-                <img src={primaryPhotoUrl} alt={`${make} ${model} ${trim}`} className='card-image' />
+                <img src={photoUrls[0]} alt={`${make} ${model} ${trim}`} className='card-image' />
                 <Typography className="overlay-bar" variant="subtitle1">{`${year} ${make} ${model} ${trim}`}</Typography>
             </div>
             <div className="card-content">
