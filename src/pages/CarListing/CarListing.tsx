@@ -10,7 +10,7 @@ import './CarListing.css';
 const CarListing: React.FC = () => {
     const [jsonData, setJsonData] = useState<any[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState<number>(8); // Adjust the number of items per page as needed
+    const [itemsPerPage] = useState<number>(20); // Adjust the number of items per page as needed
     
     const [totalPages, setTotalPages] = useState<number>(1);
     const [filters, setFilters] = useState<Filters>({

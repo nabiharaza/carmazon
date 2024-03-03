@@ -1,37 +1,48 @@
 .details-page {
     position: relative; /* Ensure proper positioning of the back button */
 }
-.details-container {
+
+.back-button {
     display: flex;
-    flex-wrap: wrap;
-    padding: 20px;
+    top: 20px;
+    left: 20px;
 }
 
-top-title-bar{
+.back-link {
+    /*display: block;*/
+    display: flex;
+    width: 30px;
+    height: 30px;
+    text-decoration: none;
+    align-items: center;
+}
+
+.back-link:hover {
+    color: #000000;
+    font-weight: bold;/* Change the color to your desired hover color */
+}
+
+.back-text {
+    margin-left: 15px; /* Adjust as needed */
+    font-size: 20px; /* Adjust font size as needed */
+    color: #000000;
+}
+
+.top-title-bar {
     display: flex;
     flex-direction: column;
     padding: 20px; /* Adjust padding as needed */
-}
-.title {
-    margin-bottom: 30px;
 }
 
 .title-wrapper {
     display: flex;
     align-items: center;
 }
-.title h2 {
-    margin: 0;
-}
 
-.carousel-image {
-    width: 100%;
-    height: auto;
-    border: 2px solid #ccc; /* Add a border for better visibility */
-    border-radius: 8px; /* Optional: Add border radius for rounded corners */
-    object-fit: cover; /* Ensures the image covers the entire container */
-    align-content: center;
-
+.details-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
 }
 
 .images-container {
@@ -42,11 +53,10 @@ top-title-bar{
     /*border: 2px solid #29ff8e;*/
     float: left;
     justify-content: center;
-
 }
 
 .short-details-card {
-idth: 20%;
+    idth: 20%;
     height: auto;
     background-color: #ffffff;
     padding: 20px;
@@ -62,13 +72,6 @@ idth: 20%;
 
 .short-details-card:hover {
     box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2); /* Change shadow on hover for interactive feel */
-}
-/*.short-details-card {*/
-/*    font-size: 14px;*/
-/*}*/
-
-.card:hover {
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Change shadow on hover for interactive feel */
 }
 
 .tabs-container {
@@ -128,7 +131,10 @@ idth: 20%;
     display: flex;
     align-items: center;
     margin-right: 20px;
-    margin-bottom: 10px;
+}
+
+.detail-text {
+    margin: 0;
 }
 
 .detail-icon {
@@ -137,39 +143,10 @@ idth: 20%;
     margin-right: 10px;
 }
 
-.detail-text {
-    margin: 0;
-}
-
-.back-button {
-    display: flex;
-    top: 20px;
-    left: 20px;
-}
-
-.back-link {
-    /*display: block;*/
-    display: flex;
-    width: 30px;
-    height: 30px;
-    text-decoration: none;
-    align-items: center;
-}
-
 .back-arrow-icon {
     width: 100%;
     height: auto;
 
-}
-.back-text {
-    margin-left: 15px; /* Adjust as needed */
-    font-size: 20px; /* Adjust font size as needed */
-    color: #000000;
-}
-
-.back-link:hover {
-    color: #000000;
-    font-weight: bold;/* Change the color to your desired hover color */
 }
 
 .hot-icon {
