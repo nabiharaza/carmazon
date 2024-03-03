@@ -1,12 +1,11 @@
 import React from 'react';
-import './Navbar.css';
-import logo from '../../images/cartoad.png'; // Adjust the import path accordingly
-
-function Navbar() {
+import './Header.css';
+// import logo from '../../assets/images/cartoad.png';
+function Header() {
     return (
         <nav className="navbar">
             <div className="logo">
-                <img src={logo} alt="Logo"/>
+                {/* <img src={logo} alt="Logo"/> */}
             </div>
             <ul className="navbar-nav">
                 <li className="nav-item">
@@ -23,4 +22,4 @@ function Navbar() {
     );
 }
 
-export default Navbar;
+export default Header;
