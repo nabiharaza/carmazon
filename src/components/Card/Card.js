@@ -2,8 +2,9 @@ import React from 'react';
 import {Card, CardContent, CardMedia, Typography, Button} from '@mui/material';
 import './Card.css'; // Import the CSS file
 
+
 function CustomCard({data}) {
-    const {make, model, vin, year, trim, price, state, city, mileage, dealerName, photoUrls} = data;
+    const {make, model, vin, year, trim, price, state, city, mileage, dealerName, photoUrls,primaryPhotoUrl} = data;
 
     return (
         <Card className="custom-card">

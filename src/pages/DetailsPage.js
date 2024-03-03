@@ -8,6 +8,8 @@ import clickoffIcon from '../images/origin.png';
 import colorIcon from '../images/display_colour.png';
 import bodyStyleIcon from '../images/display_style.png';
 import bodyTypeIcon from '../images/body_type.png';
+import backarrow from '../images/icons/back-arrow-icon.png';
+import hotlisting from '../images/icons/fire-flame.gif';
 
 
 function DetailsPage() {
@@ -21,6 +23,7 @@ function DetailsPage() {
             const jsonData = JSON.parse(storedData);
             const matchedRecord = jsonData.find(item => item.vin === vin);
             if (matchedRecord) {
+                preloadImages(matchedRecord.photoUrls);
                 setRecord(matchedRecord);
             }
         }
@@ -30,19 +33,33 @@ function DetailsPage() {
         setActiveTab(tab);
     };
 
+   const preloadImages = (urls) => {
+        urls.forEach((url) => {
+            const img = new Image();
+            img.src = url;
+        });
+    };
     if (!record) {
         return <div>Loading...</div>;
     }
     return (
         <div className="details-page">
+            <div className="back-button">
+                <Link to="/" className="back-link">
+                    <img src={backarrow} alt="Search" className="back-arrow-icon" />
+                      <span className="back-text">Back</span>
+                </Link>
+            </div>
             <div className="top-title-bar">
+                <div className="title-wrapper">
+                {record.isHot && <img src={hotlisting} alt="Hot" className="hot-icon" />}
                 <h2>{record.year} {record.make} {record.model}</h2>
+            </div>
                 <div className="details">
                     <p>Price: {record.price} | Mileage: {record.mileage}</p>
                 </div>
             </div>
             <div className="details-container">
-                <Link to="/">Back</Link>
                 <div className="images-container">
                     <Carousel
                         autoPlay={false}
@@ -66,8 +83,7 @@ function DetailsPage() {
                         ))}
                     </Carousel>
                 </div>
-                <div className="card">
-                    <div className="card-content">
+                <div className="short-details-card">
                         <h2>{record.make} {record.model}</h2>
                         <p>Year: {record.year}</p>
                         <p>Price: {record.price}</p>
@@ -78,7 +94,6 @@ function DetailsPage() {
                         <p>Recent Price Drop: {record.recentPriceDrop ? 'Yes' : 'No'}</p>
                         <p>Is Hot: {record.isHot ? 'Yes' : 'No'}</p>
                         <p>Dealer: {record.dealerName}</p>
-                    </div>
                 </div>
                 <div className="tabs-container">
                     <div className="tabs">
