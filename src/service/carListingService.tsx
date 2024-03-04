@@ -4,7 +4,6 @@ export async function fetchCarListingData(queryString?: string): Promise<APIResp
         const response = await fetch(apiUrl);
         const data = await response.json();
 
-        // Write fetched JSON data to local temporary file
         localStorage.setItem('jsonData', JSON.stringify(data.records));
         console.log('Fetched JSON Data:', data);
         return data
@@ -15,3 +14,35 @@ export async function fetchCarListingData(queryString?: string): Promise<APIResp
         return null;
     }
 };
+
+export async function vinIntelligentAnalysis(vin?: string): Promise<VinIntelligence | null> {
+    try {
+        const apiUrl: string = `https://auto.dev/api/vin/${vin}/intelligence`;
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+
+        const listimate = data.listimate;
+        if (!listimate) {
+            return null;
+        }
+
+        const { targetPrice, fairPriceHigh, fairPriceLow, priceLimitHigh, priceLimitLow } = listimate;
+        return { targetPrice, fairPriceHigh, fairPriceLow, priceLimitHigh, priceLimitLow };
+    } catch (error) {
+        console.error('Error fetching VIN intelligent analysis:', error);
+        return null;
+    }
+}
+
+export async function vinDetails(vin?: string): Promise<VinIntelligence | null> {
+    try {
+        const apiUrl: string = `https://auto.dev/api/listings/${vin}`;
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        console.log('Fetched vin detailsJSON Data:', data);
+        return data
+    } catch (error) {
+        console.error('Error fetching VIN intelligent analysis:', error);
+        return null;
+    }
+}
