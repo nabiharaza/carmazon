@@ -34,7 +34,7 @@ export async function vinIntelligentAnalysis(vin?: string): Promise<VinIntellige
     }
 }
 
-export async function vinDetails(vin?: string): Promise<VinIntelligence | null> {
+export async function vinDetails(vin?: string): Promise<VinDetails | null> {
     try {
         const apiUrl: string = `https://auto.dev/api/listings/${vin}`;
         const response = await fetch(apiUrl);
