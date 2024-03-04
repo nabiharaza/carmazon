@@ -3,7 +3,7 @@ import {Link, useParams} from 'react-router-dom';
 import './CarDetail.css';
 import Carousel from 'react-material-ui-carousel';
 import {Button} from '@mui/material';
-import {vinIntelligentAnalysis,vinDetails} from '../../service/carListingService';
+import {vinIntelligentAnalysis, vinDetails} from '../../service/carListingService';
 import distanceIcon from '../../assets/icons/distance-pin.svg';
 import clickoffIcon from '../../assets/icons/link.svg';
 import colorIcon from '../images/display_colour.png';
@@ -48,19 +48,34 @@ interface VinIntelligence {
     priceLimitLow: number;
 }
 
-interface VinDetails{
+interface VinDetails {
     bodyType: string;
     carfax: string;
     carfaxOneOwner: string;
     colorInterior: string;
     colorExterior: string;
-    condition : string;
+    condition: string;
     features: string[];
     photoUrls: string[];
     dealerName: string;
     address: string;
     phone: string;
+    make: string;
+    model: string;
+    vin: string;
+    year: number;
+    trim: string;
+    price: number;
+    state: string;
+    city: string;
+    mileage: number;
+    overlay: string;
+    primaryPhotoUrl: string;
+    isHot: boolean;
+    recentPriceDrop: boolean;
 }
+
+
 const CarDetail: React.FC = () => {
     const {vin} = useParams<{ vin: string }>(); // Access the route parameter 'vin'
     const [record, setRecord] = useState<Record | null>(null);
@@ -96,12 +111,13 @@ const CarDetail: React.FC = () => {
         fetchVinIntelligentDetails();
 
 
-         const fetchVinDetails = async () => {
+        const fetchVinDetails = async () => {
             try {
                 const vinData = await vinDetails(vin);
                 setVinDetails(vinData);
+                console.log('Vin Details:', vinData);
             } catch (error) {
-                console.error('Error fetching additional details:', error);
+                console.error('Error fetching VIN details:', error);
             }
         };
 
@@ -132,24 +148,24 @@ const CarDetail: React.FC = () => {
             </div>
             <div className="top-title-bar">
                 <div className="title-wrapper">
-                    <h2>{record.year} {record.make} {record.model}</h2>
-                    {record.isHot && <span className="hot-label">Hot Listing</span>}
-                    {record.recentPriceDrop && <span className="price-drop-label">Price Drop</span>}
+                    <h2>{vinDetailsInformation.year} {vinDetailsInformation.make} {vinDetailsInformation.model}</h2>
+                    {vinDetailsInformation.isHot && <span className="hot-label">Hot Listing</span>}
+                    {vinDetailsInformation.recentPriceDrop && <span className="price-drop-label">Price Drop</span>}
 
                 </div>
                 <div className="below-title-summay">
                     {/*<p>Price: {record.price} | Mileage: {record.mileage}</p>*/}
                     <div className="detail-item">
                         <p className="detail-label">Price:</p>
-                        <p className="detail-value">{record.price}</p> {/* Display the VIN */}
+                        <p className="detail-value">{vinDetailsInformation.price}</p> {/* Display the VIN */}
                     </div>
                     <div className="detail-item">
                         <p className="detail-label">Mileage:</p>
-                        <p className="detail-value">{record.mileage}</p> {/* Display the VIN */}
+                        <p className="detail-value">{vinDetailsInformation.mileage}</p> {/* Display the VIN */}
                     </div>
                     <div className="detail-item">
                         <p className="detail-label">VIN:</p>
-                        <p className="detail-value">{record.vin}</p> {/* Display the VIN */}
+                        <p className="detail-value">{vinDetailsInformation.vin}</p> {/* Display the VIN */}
                         <Button onClick={handleCopyVin}>
                             <img src={copyIcon} alt="Copy VIN" className="copy-icon"/>
                         </Button>
@@ -175,43 +191,43 @@ const CarDetail: React.FC = () => {
                             }
                         }}
                     >
-                        {record.photoUrls.map((url, index) => (
+                        {vinDetailsInformation?.photoUrls?.map((url, index) => (
                             <img key={index} src={url} alt={`Car ${index + 1}`} className="carousel-image"/>
                         ))}
                     </Carousel>
                 </div>
                 <div className="short-details-card">
-                    <h2>{record.year} {record.make} {record.model}</h2>
+                    <h2>{vinDetailsInformation.year} {vinDetailsInformation.make} {vinDetailsInformation.model}</h2>
 
                     <div className="detail-item">
                         <img src={priceIcon} alt="Price Icon" className="detail-icon"/>
                         <p className="detail-label">Price:</p>
-                        <p className="detail-value">{record.price}</p>
+                        <p className="detail-value">{vinDetailsInformation.price}</p>
                     </div>
                     <div className="detail-item">
                         <img src={conditionIcon} alt="Condition Icon" className="detail-icon"/>
                         <p className="detail-label">Condition:</p>
-                        <p className="detail-value">{record.condition}</p>
+                        <p className="detail-value">{vinDetailsInformation.condition}</p>
                     </div>
                     <div className="detail-item">
                         <img src={mileageIcon} alt="Mileage Icon" className="detail-icon"/>
                         <p className="detail-label">Mileage:</p>
-                        <p className="detail-value">{record.mileage}</p>
+                        <p className="detail-value">{vinDetailsInformation.mileage}</p>
                     </div>
                     <div className="detail-item">
                         <img src={LocationIcon} alt="City Icon" className="detail-icon"/>
                         <p className="detail-label">City:</p>
-                        <p className="detail-value">{record.city}, {record.state}</p>
+                        <p className="detail-value">{vinDetailsInformation.city}, {vinDetailsInformation.state}</p>
                     </div>
                     <div className="detail-item">
                         <img src={priceDropIcon} alt="Price Drop Icon" className="detail-icon"/>
                         <p className="detail-label">Recent Price Drop:</p>
-                        <p className="detail-value">{record.recentPriceDrop ? 'Yes' : 'No'}</p>
+                        <p className="detail-value">{vinDetailsInformation.recentPriceDrop ? 'Yes' : 'No'}</p>
                     </div>
                     <div className="detail-item">
                         <img src={ShopIcon} alt="Dealer Icon" className="detail-icon"/>
                         <p className="detail-label">Dealer:</p>
-                        <p className="detail-value">{record.dealerName}</p>
+                        <p className="detail-value">{vinDetailsInformation.dealerName}</p>
                     </div>
                 </div>
                 <div className="tabs-container">

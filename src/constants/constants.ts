@@ -66,4 +66,17 @@ interface VinDetails {
     dealerName: string;
     address: string;
     phone: string;
+    make: string;
+    model: string;
+    vin: string;
+    year: number;
+    trim: string;
+    price: number;
+    state: string;
+    city: string;
+    mileage: number;
+    overlay: string;
+    primaryPhotoUrl: string;
+    isHot: boolean;
+    recentPriceDrop: boolean;
 }
