@@ -42,7 +42,7 @@ export async function vinDetails(vin?: string): Promise<VinDetails | null> {
         console.log('Fetched vin detailsJSON Data:', data);
         return data
     } catch (error) {
-        console.error('Error fetching VIN intelligent analysis:', error);
+        console.error('Error fetching VIN Details :', error);
         return null;
     }
 }
