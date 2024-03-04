@@ -45,3 +45,25 @@ interface CardData {
 interface CustomCardProps {
     data: CardData;
 }
+
+interface VinIntelligence {
+    targetPrice: number;
+    fairPriceHigh: number;
+    fairPriceLow: number;
+    priceLimitHigh: number;
+    priceLimitLow: number;
+}
+
+interface vinDetails{
+    bodyType: string;
+    carfax: string;
+    carfaxOneOwner: string;
+    colorInterior: string;
+    colorExterior: string;
+    condition : string;
+    features: string[];
+    photoUrls: string[];
+    dealerName: string;
+    address: string;
+    phone: string;
+}

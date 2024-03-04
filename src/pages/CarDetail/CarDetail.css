@@ -29,6 +29,10 @@
     color: #000000;
 }
 
+.below-title-summay{
+    display: flex;
+    padding-top: 0;
+}
 .top-title-bar {
     display: flex;
     flex-direction: column;
@@ -47,8 +51,8 @@
 .carousel-image {
     width: 100%;
     height: 100%; /* Set the height to 100% */
-    object-fit: cover; /* Ensure the image covers the entire container */
-    border: 2px solid #ccc; /* Add a border for better visibility */
+    object-fit: contain; /* Ensure the image covers the entire container */
+    /*border: 2px solid #ccc; !* Add a border for better visibility *!*/
     border-radius: 8px; /* Optional: Add border radius for rounded corners */
 }
 .images-container {
@@ -72,7 +76,7 @@
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for a modern look */
     transition: box-shadow 0.3s ease; /* Add transition for hover effect */
-    border: 2px solid #3d3d3d;
+    /*border: 2px solid #3d3d3d;*/
     margin-bottom: 14px;
 
 }
@@ -139,7 +143,11 @@
     align-items: center;
     margin-right: 20px;
 }
+.detail-item:hover {
+    box-shadow:  0px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 
+}
 .detail-text {
     margin: 0;
 }
@@ -244,11 +252,11 @@
 
 @media (min-width: 992px) {
   .left-section {
-    width: 70%;
+    width: 60%;
   }
 
   .right-section {
-    width: 30%;
+    width: 20%;
   }
 }
  CSS for large screens
@@ -258,16 +266,16 @@
     }
 
     .images-container {
-        width: 70%; /* Set width to 40% for large screens */
+        width: 60%; /* Set width to 40% for large screens */
     }
 
     .short-details-card {
-        width: calc(30% - 20px); /* Set width to 30% minus margin for large screens */
+        width: calc(20% - 20px); /* Set width to 30% minus margin for large screens */
         margin-left: 20px; /* Adjust left margin */
     }
 
     .carousel-image {
-        max-height: 700px; /* Set maximum height for images */
+        max-height: 600px; /* Set maximum height for images */
     }
 }
 
@@ -279,7 +287,7 @@
     }
 
     .images-container {
-        width: 70%; /* Set width to 30% for extra large screens */
+        width: 60%; /* Set width to 30% for extra large screens */
     }
 
     .short-details-card {
@@ -306,4 +314,10 @@
   and (max-device-width: 1024px)
   and (orientation: portrait) {
     /* Your CSS rules for iPad portrait orientation */
+}
+
+.copy-icon {
+    width: 25x;
+    height: 25px;
+    align-content: flex-start;
 }
