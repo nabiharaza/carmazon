@@ -54,7 +54,7 @@ interface VinIntelligence {
     priceLimitLow: number;
 }
 
-interface vinDetails{
+interface VinDetails {
     bodyType: string;
     carfax: string;
     carfaxOneOwner: string;
