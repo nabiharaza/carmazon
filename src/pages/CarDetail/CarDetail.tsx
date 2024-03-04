@@ -130,11 +130,11 @@ const CarDetail: React.FC = () => {
     };
 
 
-    if (!record) {
+    if (!vinDetailsInformation) {
         return <div>Loading...</div>;
     }
     const handleCopyVin = () => {
-        navigator.clipboard.writeText(record.vin); // Copies the VIN to the clipboard
+        navigator.clipboard.writeText(vinDetailsInformation?.vin); // Copies the VIN to the clipboard
     };
 
 
@@ -148,24 +148,24 @@ const CarDetail: React.FC = () => {
             </div>
             <div className="top-title-bar">
                 <div className="title-wrapper">
-                    <h2>{vinDetailsInformation.year} {vinDetailsInformation.make} {vinDetailsInformation.model}</h2>
-                    {vinDetailsInformation.isHot && <span className="hot-label">Hot Listing</span>}
-                    {vinDetailsInformation.recentPriceDrop && <span className="price-drop-label">Price Drop</span>}
+                    <h2>{vinDetailsInformation?.year} {vinDetailsInformation?.make} {vinDetailsInformation?.model}</h2>
+                    {vinDetailsInformation?.isHot && <span className="hot-label">Hot Listing</span>}
+                    {vinDetailsInformation?.recentPriceDrop && <span className="price-drop-label">Price Drop</span>}
 
                 </div>
                 <div className="below-title-summay">
                     {/*<p>Price: {record.price} | Mileage: {record.mileage}</p>*/}
                     <div className="detail-item">
                         <p className="detail-label">Price:</p>
-                        <p className="detail-value">{vinDetailsInformation.price}</p> {/* Display the VIN */}
+                        <p className="detail-value">{vinDetailsInformation?.price}</p> {/* Display the VIN */}
                     </div>
                     <div className="detail-item">
                         <p className="detail-label">Mileage:</p>
-                        <p className="detail-value">{vinDetailsInformation.mileage}</p> {/* Display the VIN */}
+                        <p className="detail-value">{vinDetailsInformation?.mileage}</p> {/* Display the VIN */}
                     </div>
                     <div className="detail-item">
                         <p className="detail-label">VIN:</p>
-                        <p className="detail-value">{vinDetailsInformation.vin}</p> {/* Display the VIN */}
+                        <p className="detail-value">{vinDetailsInformation?.vin}</p> {/* Display the VIN */}
                         <Button onClick={handleCopyVin}>
                             <img src={copyIcon} alt="Copy VIN" className="copy-icon"/>
                         </Button>
@@ -197,37 +197,37 @@ const CarDetail: React.FC = () => {
                     </Carousel>
                 </div>
                 <div className="short-details-card">
-                    <h2>{vinDetailsInformation.year} {vinDetailsInformation.make} {vinDetailsInformation.model}</h2>
+                    <h2>{vinDetailsInformation?.year} {vinDetailsInformation?.make} {vinDetailsInformation?.model}</h2>
 
                     <div className="detail-item">
                         <img src={priceIcon} alt="Price Icon" className="detail-icon"/>
                         <p className="detail-label">Price:</p>
-                        <p className="detail-value">{vinDetailsInformation.price}</p>
+                        <p className="detail-value">{vinDetailsInformation?.price}</p>
                     </div>
                     <div className="detail-item">
                         <img src={conditionIcon} alt="Condition Icon" className="detail-icon"/>
                         <p className="detail-label">Condition:</p>
-                        <p className="detail-value">{vinDetailsInformation.condition}</p>
+                        <p className="detail-value">{vinDetailsInformation?.condition}</p>
                     </div>
                     <div className="detail-item">
                         <img src={mileageIcon} alt="Mileage Icon" className="detail-icon"/>
                         <p className="detail-label">Mileage:</p>
-                        <p className="detail-value">{vinDetailsInformation.mileage}</p>
+                        <p className="detail-value">{vinDetailsInformation?.mileage}</p>
                     </div>
                     <div className="detail-item">
                         <img src={LocationIcon} alt="City Icon" className="detail-icon"/>
                         <p className="detail-label">City:</p>
-                        <p className="detail-value">{vinDetailsInformation.city}, {vinDetailsInformation.state}</p>
+                        <p className="detail-value">{vinDetailsInformation?.city}, {vinDetailsInformation?.state}</p>
                     </div>
                     <div className="detail-item">
                         <img src={priceDropIcon} alt="Price Drop Icon" className="detail-icon"/>
                         <p className="detail-label">Recent Price Drop:</p>
-                        <p className="detail-value">{vinDetailsInformation.recentPriceDrop ? 'Yes' : 'No'}</p>
+                        <p className="detail-value">{vinDetailsInformation?.recentPriceDrop ? 'Yes' : 'No'}</p>
                     </div>
                     <div className="detail-item">
                         <img src={ShopIcon} alt="Dealer Icon" className="detail-icon"/>
                         <p className="detail-label">Dealer:</p>
-                        <p className="detail-value">{vinDetailsInformation.dealerName}</p>
+                        <p className="detail-value">{vinDetailsInformation?.dealerName}</p>
                     </div>
                 </div>
                 <div className="tabs-container">
@@ -245,24 +245,24 @@ const CarDetail: React.FC = () => {
                     <div className={`tab-pane ${activeTab === 'more-details' ? 'active' : ''}`}>
                         <div className="detail-item">
                             <img src={distanceIcon} alt="Icon" className="detail-icon"/>
-                            <p className="detail-text">Distance From Origin: {record.distanceFromOrigin}</p>
+                            <p className="detail-text">Distance From Origin: {record?.distanceFromOrigin}</p>
                         </div>
                         <div className="detail-item">
-                            <a href={record.clickoffUrl}>
+                            <a href={record?.clickoffUrl}>
                                 <img src={clickoffIcon} alt="Icon" className="detail-icon"/>
                             </a>
                             <p>Clickoff URL</p>
                         </div>
                         <div className="detail-item">
-                            <p className="detail-text">Display Color: {record.displayColor || 'Not available'}</p>
+                            <p className="detail-text">Display Color: {record?.displayColor || 'Not available'}</p>
                         </div>
                         <div className="detail-item">
                             <img src={bodyStyleIcon} alt="Icon" className="detail-icon"/>
-                            <p className="detail-text">Body Style: {record.bodyStyle}</p>
+                            <p className="detail-text">Body Style: {record?.bodyStyle}</p>
                         </div>
                         <div className="detail-item">
                             <img src={bodyTypeIcon} alt="Icon" className="detail-icon"/>
-                            <p className="detail-text">Body Type: {record.bodyType}</p>
+                            <p className="detail-text">Body Type: {record?.bodyType}</p>
                         </div>
                         {additionalDetails && (
                             <div className="detail-item">
