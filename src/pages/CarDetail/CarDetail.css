@@ -20,7 +20,7 @@
 
 .back-link:hover {
     color: #000000;
-    font-weight: bold;/* Change the color to your desired hover color */
+    font-weight: bold; /* Change the color to your desired hover color */
 }
 
 .back-text {
@@ -29,10 +29,11 @@
     color: #000000;
 }
 
-.below-title-summay{
+.below-title-summay {
     display: flex;
     padding-top: 0;
 }
+
 .top-title-bar {
     display: flex;
     flex-direction: column;
@@ -48,13 +49,15 @@
     display: flex;
     flex-wrap: wrap;
 }
+
 .carousel-image {
     width: 100%;
     height: 100%; /* Set the height to 100% */
     object-fit: contain; /* Ensure the image covers the entire container */
     /*border: 2px solid #ccc; !* Add a border for better visibility *!*/
-    border-radius: 8px; /* Optional: Add border radius for rounded corners */
+    border-radius: 20px; /* Optional: Add border radius for rounded corners */
 }
+
 .images-container {
     width: 60%;
     height: 100%;
@@ -64,6 +67,7 @@
     /*border: 2px solid #29ff8e;*/
     float: left;
     justify-content: center;
+    border-radius: 14px;
 }
 
 .short-details-card {
@@ -74,9 +78,9 @@
     padding-left: 20px;
     margin-left: 60px; /* Add margin-left to create a gap with the image carousel */
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for a modern look */
+    box-shadow: 0 4px 6px rgba(0.1, 0.1, 0.1, 0.2); /* Add shadow for a modern look */
     transition: box-shadow 0.3s ease; /* Add transition for hover effect */
-    /*border: 2px solid #3d3d3d;*/
+    border: 1px solid #dedede;
     margin-bottom: 14px;
 
 }
@@ -125,12 +129,9 @@
 }
 
 .tab-pane {
-    width: 100%;
+    width: 80%;
     display: none;
-}
-
-.tab-pane.active {
-    display: block;
+    justify-content: center;
 }
 
 .tab-pane.active {
@@ -143,11 +144,13 @@
     align-items: center;
     margin-right: 20px;
 }
+
 .detail-item:hover {
-    box-shadow:  0px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
 
 }
+
 .detail-text {
     margin: 0;
 }
@@ -230,7 +233,8 @@
 }
 
 
- CSS for medium screens
+CSS for medium screens
+
 @media (min-width: 576px) and (max-width: 768px) {
     .details-page {
         padding: 30px; /* Adjust padding for medium screens */
@@ -238,6 +242,7 @@
 
     .images-container {
         width: 60%; /* Set width to 50% for medium screens */
+        /*border-radius: 14px;*/
     }
 
     .short-details-card {
@@ -247,26 +252,31 @@
 
     .carousel-image {
         max-height: 500px; /* Set maximum height for images */
+        border-radius: 20px
     }
 }
 
 @media (min-width: 992px) {
-  .left-section {
-    width: 60%;
-  }
+    .left-section {
+        width: 60%;
+    }
 
-  .right-section {
-    width: 20%;
-  }
+    .right-section {
+        width: 20%;
+    }
 }
- CSS for large screens
+
+CSS for large screens
+
 @media (min-width: 768px) and (max-width: 992px) {
     .details-page {
-        padding: 40px; /* Adjust padding for large screens */
+        padding-top: 20px; /* Adjust padding for large screens */
+        padding-left: 15px;
     }
 
     .images-container {
         width: 60%; /* Set width to 40% for large screens */
+        /*border-radius: 14px;*/
     }
 
     .short-details-card {
@@ -276,18 +286,21 @@
 
     .carousel-image {
         max-height: 600px; /* Set maximum height for images */
+        border-radius: 20px
     }
 }
 
 /* CSS for extra large screens */
-/* CSS for extra large screens */
-@media (min-width: 992px) {
+@media (min-width: 992px) and (max-width: 1180px) {
     .details-page {
         padding: 50px; /* Adjust padding for extra large screens */
+        padding-left: 100px;
+        padding-bottom: 40px;
     }
 
     .images-container {
         width: 60%; /* Set width to 30% for extra large screens */
+        /*border-radius: 14px;*/
     }
 
     .short-details-card {
@@ -297,27 +310,103 @@
 
     .carousel-image {
         max-height: 500px; /* Set maximum height for images */
+        border-radius: 20px
+    }
+}
+
+/* CSS for extra extra large screens */
+@media (min-width: 1181px) and (max-width: 2000px) {
+    .details-page {
+        padding: 50px; /* Adjust padding for extra large screens */
+        padding-left: 100px;
+        padding-bottom: 40px;
+    }
+
+    .images-container {
+        width: 60%; /* Set width to 30% for extra large screens */
+        /*border-radius: 14px;*/
+    }
+
+    .short-details-card {
+        width: calc(25% - 1px); /* Set width to 25% minus margin for extra large screens */
+        margin-left: 30px; /* Adjust left margin */
+    }
+
+    .carousel-image {
+        max-height: 500px; /* Set maximum height for images */
+        border-radius: 20px
     }
 }
 
 /* iPad Landscape */
 @media only screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px)
-  and (orientation: landscape) {
+and (min-device-width: 768px)
+and (max-device-width: 1024px)
+and (orientation: landscape) {
     /* Your CSS rules for iPad landscape orientation */
 }
 
 /* iPad Portrait */
 @media only screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px)
-  and (orientation: portrait) {
+and (min-device-width: 768px)
+and (max-device-width: 1024px)
+and (orientation: portrait) {
     /* Your CSS rules for iPad portrait orientation */
 }
 
 .copy-icon {
-    width: 25x;
-    height: 25px;
+    width: 22px;
+    height: 22px;
     align-content: flex-start;
+
+}
+
+.carousel-buttons {
+    width: 30px;
+    height: 30px;
+}
+
+.dealer-link {
+    color: #1a1aec; /* Set link color */
+    /*text-decoration: underline; !* Remove default underline *!*/
+    transition: color 0.3s ease; /* Add smooth transition for color change */
+}
+
+.dealer-link:hover {
+    color: #000000; /* Change link color on hover */
+    text-decoration: underline;
+}
+
+.specifications {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.spec-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 20px; /* Adjust as needed */
+}
+
+.spec-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2px; /* Adjust as needed */
+}
+
+.spec-label {
+    font-size: 14px; /* Adjust size as needed */
+    margin-right: 5px; /* Adjust spacing as needed */
+}
+
+.spec-value {
+    font-size: 14px;
+}
+
+.spec-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
 }

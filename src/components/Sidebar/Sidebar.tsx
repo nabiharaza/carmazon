@@ -15,7 +15,7 @@ const Sidebar: React.FC<LeftFilterNavbarProps> = ({ onApplyFilters }) => {
         zipCode: '',
         latitude: 0,
         longitude: 0,
-        radius: 0
+        // radius: 0
     });
     const [isNavbarCollapsed, setNavbarCollapsed] = useState(false);
 
@@ -81,20 +81,20 @@ const Sidebar: React.FC<LeftFilterNavbarProps> = ({ onApplyFilters }) => {
                         onChange={handleFieldChange('zipCode')}
                     />
                 </div>
-                <div className="filter-group">
-                    <select
-                        value={localFilters.radius}
-                        onChange={handleFieldChange('radius')}
-                        className="dropdown-toggle"
-                    >
-                        <option value="">Radius</option>
-                        <option value="10">10</option>
-                        <option value="30">20</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                        <option value="500">500</option>
-                    </select>
-                </div>
+                {/*<div className="filter-group">*/}
+                {/*    <select*/}
+                {/*        value={localFilters.radius}*/}
+                {/*        onChange={handleFieldChange('radius')}*/}
+                {/*        className="dropdown-toggle"*/}
+                {/*    >*/}
+                {/*        <option value="">Radius</option>*/}
+                {/*        <option value="10">10</option>*/}
+                {/*        <option value="30">20</option>*/}
+                {/*        <option value="50">50</option>*/}
+                {/*        <option value="100">100</option>*/}
+                {/*        <option value="500">500</option>*/}
+                {/*    </select>*/}
+                {/*</div>*/}
                 <div className="filter-group">
                     <div className="dropdown">
                         <button className="dropdown-toggle" onClick={toggleDropdown}>

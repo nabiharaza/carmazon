@@ -3,9 +3,8 @@ import {Link, useParams} from 'react-router-dom';
 import './CarDetail.css';
 import Carousel from 'react-material-ui-carousel';
 import {Button} from '@mui/material';
-import {vinIntelligentAnalysis, vinDetails} from '../../service/carListingService';
-import distanceIcon from '../../assets/icons/distance-pin.svg';
-import clickoffIcon from '../../assets/icons/link.svg';
+import {vinIntelligentAnalysis, vinDetails, carKeyFeatures} from '../../service/carListingService';
+import distanceIcon from '../../assets/icons/noun-distance-1514833.svg';
 import colorIcon from '../images/display_colour.png';
 import bodyStyleIcon from '../../assets/icons/car.svg';
 import bodyTypeIcon from '../../assets/icons/noun-car-95549.svg';
@@ -15,9 +14,13 @@ import priceIcon from '../../assets/icons/noun-price-tag-5016978.svg';
 import conditionIcon from '../../assets/icons/noun-sale-offer-4316748.svg';
 import mileageIcon from '../../assets/icons/noun-speedometer-3955246.svg';
 import priceDropIcon from '../../assets/icons/noun-price-drop-5974867.svg';
-import ShopIcon from '../../assets/icons/noun-car-dealer-789273.svg';
+import ShopIcon from '../../assets/icons/noun-link-2091732.svg';
 import LocationIcon from '../../assets/icons/noun-location-6646256.svg';
 import copyIcon from '../../assets/icons/noun-copy-6644209.svg';
+import nextIcon from '../../assets/icons/noun-next-button-5611387.svg';
+import previousIcon from '../../assets/icons/noun-back-button-251451.svg';
+import sunroofIcon from '../../assets/icons/tabs/noun-car-4372165.svg';
+import heatedSeatIcon from '../../assets/icons/tabs/noun-seat-3355762.svg';
 
 interface Record {
     vin: string;
@@ -75,6 +78,11 @@ interface VinDetails {
     recentPriceDrop: boolean;
 }
 
+interface CarListingKeyFeatures {
+    listingId: number;
+    modelId: number;
+    createdAt: string;
+}
 
 const CarDetail: React.FC = () => {
     const {vin} = useParams<{ vin: string }>(); // Access the route parameter 'vin'
@@ -82,6 +90,7 @@ const CarDetail: React.FC = () => {
     const [activeTab, setActiveTab] = useState<'more-details' | 'specs' | 'others'>('more-details');
     const [additionalDetails, setAdditionalDetails] = useState<VinIntelligence | null>(null);
     const [vinDetailsInformation, setVinDetails] = useState<VinDetails | null>(null);
+    const [carKeyFeaturesInformation, setCarKeyInfomation] = useState<CarListingKeyFeatures | null>(null);
 
 
     useEffect(() => {
@@ -122,6 +131,20 @@ const CarDetail: React.FC = () => {
         };
 
         fetchVinDetails();
+
+        // const {originalData, filteredData} = await carKeyFeatures(vin);
+        const fetchCarKeyFeatures = async () => {
+            try {
+                const {originalData, filteredData} = await carKeyFeatures(vin);
+                setCarKeyInfomation(filteredData);
+                console.log('Car Features Details:', filteredData);
+                console.log('Original All RAW DATA: ', originalData )
+            } catch (error) {
+                console.error('Error fetching VIN details:', error);
+            }
+        };
+
+        fetchCarKeyFeatures();
     }, [vin]);
 
 
@@ -136,7 +159,6 @@ const CarDetail: React.FC = () => {
     const handleCopyVin = () => {
         navigator.clipboard.writeText(vinDetailsInformation?.vin); // Copies the VIN to the clipboard
     };
-
 
     return (
         <div className="details-page">
@@ -154,7 +176,6 @@ const CarDetail: React.FC = () => {
 
                 </div>
                 <div className="below-title-summay">
-                    {/*<p>Price: {record.price} | Mileage: {record.mileage}</p>*/}
                     <div className="detail-item">
                         <p className="detail-label">Price:</p>
                         <p className="detail-value">{vinDetailsInformation?.price}</p> {/* Display the VIN */}
@@ -179,15 +200,11 @@ const CarDetail: React.FC = () => {
                         animation="slide"
                         indicators={false}
                         navButtonsAlwaysVisible={true}
-                        NextIcon={<Button>Next</Button>}
-                        PrevIcon={<Button>Prev</Button>}
+                        NextIcon={<img src={nextIcon} alt="Next Icon" className="carousel-buttons"/>}
+                        PrevIcon={<img src={previousIcon} alt="Previous Icon" className="carousel-buttons"/>}
                         navButtonsProps={{
                             style: {
-                                backgroundColor: 'rgb(234,233,233)',
-                                color: '#000',
-                                borderRadius: '20%',
-                                width: '30px',
-                                height: '30px'
+                                backgroundColor: 'rgba(255,255,255,0)',
                             }
                         }}
                     >
@@ -212,7 +229,7 @@ const CarDetail: React.FC = () => {
                     <div className="detail-item">
                         <img src={mileageIcon} alt="Mileage Icon" className="detail-icon"/>
                         <p className="detail-label">Mileage:</p>
-                        <p className="detail-value">{vinDetailsInformation?.mileage}</p>
+                        <p className="detail-value">{vinDetailsInformation?.mileage} miles</p>
                     </div>
                     <div className="detail-item">
                         <img src={LocationIcon} alt="City Icon" className="detail-icon"/>
@@ -226,8 +243,14 @@ const CarDetail: React.FC = () => {
                     </div>
                     <div className="detail-item">
                         <img src={ShopIcon} alt="Dealer Icon" className="detail-icon"/>
-                        <p className="detail-label">Dealer:</p>
-                        <p className="detail-value">{vinDetailsInformation?.dealerName}</p>
+                        <p className="detail-label">Dealer Link:</p>
+                        <a href={record?.clickoffUrl}
+                           className="dealer-link">{vinDetailsInformation?.dealerName}</a>
+                    </div>
+                    <div className="detail-item">
+                        <img src={distanceIcon} alt="Dealer Distance Icon" className="detail-icon"/>
+                        <p className="detail-label">Dealer Distance:</p>
+                        <p className="detail-value">{record?.distanceFromOrigin} miles</p>
                     </div>
                 </div>
                 <div className="tabs-container">
@@ -243,16 +266,6 @@ const CarDetail: React.FC = () => {
                         </button>
                     </div>
                     <div className={`tab-pane ${activeTab === 'more-details' ? 'active' : ''}`}>
-                        <div className="detail-item">
-                            <img src={distanceIcon} alt="Icon" className="detail-icon"/>
-                            <p className="detail-text">Distance From Origin: {record?.distanceFromOrigin}</p>
-                        </div>
-                        <div className="detail-item">
-                            <a href={record?.clickoffUrl}>
-                                <img src={clickoffIcon} alt="Icon" className="detail-icon"/>
-                            </a>
-                            <p>Clickoff URL</p>
-                        </div>
                         <div className="detail-item">
                             <p className="detail-text">Display Color: {record?.displayColor || 'Not available'}</p>
                         </div>
@@ -290,11 +303,33 @@ const CarDetail: React.FC = () => {
                             </div>
                         )}
                     </div>
+                    <div className={`tab-pane ${activeTab === 'specs' ? 'active' : ''}`}>
+                        <div className="specifications">
+                            <div className="spec-column">
+                                {carKeyFeaturesInformation && Object.entries(carKeyFeaturesInformation).slice(0, Math.ceil(Object.entries(carKeyFeaturesInformation).length / 2)).map(([key, value]) => (
+                                    <div key={key} className="spec-item">
+                                        <img src={sunroofIcon} alt="Leather Icon" className="spec-icon"/>
+                                        <p className="spec-label">{key}:</p>
 
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="spec-column">
+                                {carKeyFeaturesInformation && Object.entries(carKeyFeaturesInformation).slice(Math.ceil(Object.entries(carKeyFeaturesInformation).length / 2)).map(([key, value]) => (
+                                    <div key={key} className="spec-item">
+                                        <img src={sunroofIcon} alt="Sunroof Icon" className="spec-icon"/>
+                                        <p className="spec-label">{key}:</p>
+
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    );
+    )
+        ;
 }
 
 export default CarDetail;

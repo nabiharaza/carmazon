@@ -60,7 +60,7 @@ interface VinDetails {
     carfaxOneOwner: string;
     colorInterior: string;
     colorExterior: string;
-    condition : string;
+    condition: string;
     features: string[];
     photoUrls: string[];
     dealerName: string;
@@ -79,4 +79,11 @@ interface VinDetails {
     primaryPhotoUrl: string;
     isHot: boolean;
     recentPriceDrop: boolean;
+}
+
+
+interface CarListingKeyFeatures {
+    listingId: number;
+    modelId: number;
+    createdAt: string;
 }
