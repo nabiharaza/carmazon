@@ -1,4 +1,6 @@
-interface Filters {
+// constants.ts
+
+export interface Filters {
     make: string[];
     model: string;
     mileage: string;
@@ -10,23 +12,23 @@ interface Filters {
     longitude: number;
 }
 
-interface Coordinates {
+export interface Coordinates {
     latitude: number;
     longitude: number;
 }
 
-interface LeftFilterNavbarProps {
+export interface LeftFilterNavbarProps {
     onApplyFilters: (filters: Filters) => void;
 }
 
-interface APIResponse {
+export interface APIResponse {
     hitsCount: number;
     records: [];
     totalCount: number;
     totalCountFormatted: string;
 }
 
-interface CardData {
+export interface CardData {
     make: string;
     model: string;
     vin: string;
@@ -42,11 +44,11 @@ interface CardData {
     primaryPhotoUrl: string;
 }
 
-interface CustomCardProps {
+export interface CustomCardProps {
     data: CardData;
 }
 
-interface VinIntelligence {
+export interface VinIntelligence {
     targetPrice: number;
     fairPriceHigh: number;
     fairPriceLow: number;
@@ -54,7 +56,7 @@ interface VinIntelligence {
     priceLimitLow: number;
 }
 
-interface VinDetails {
+export interface VinDetails {
     bodyType: string;
     carfax: string;
     carfaxOneOwner: string;
@@ -81,9 +83,10 @@ interface VinDetails {
     recentPriceDrop: boolean;
 }
 
-
-interface CarListingKeyFeatures {
+export interface CarListingKeyFeatures {
     listingId: number;
     modelId: number;
     createdAt: string;
 }
+
+// Add any other interfaces or constants as needed

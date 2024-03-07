@@ -1,11 +1,11 @@
 import React from 'react';
 import './Header.css';
-// import logo from '../../assets/images/cartoad.png';
+import logo from '../../assets/images/carmazon_mono.png';
 function Header() {
     return (
         <nav className="navbar">
-            <div className="logo">
-                {/* <img src={logo} alt="Logo"/> */}
+            <div className="app-logo">
+                 <img src={logo} alt="Logo"/>
             </div>
             <ul className="navbar-nav">
                 <li className="nav-item">

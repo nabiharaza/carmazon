@@ -3,7 +3,10 @@ import {Link, useParams} from 'react-router-dom';
 import './CarDetail.css';
 import Carousel from 'react-material-ui-carousel';
 import {Button} from '@mui/material';
+import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
+import 'react-tabs/style/react-tabs.css'; // Import the styles
 import {vinIntelligentAnalysis, vinDetails, carKeyFeatures} from '../../service/carListingService';
+import PhotoIcons from '../../service/PhotoIcons';
 import distanceIcon from '../../assets/icons/noun-distance-1514833.svg';
 import colorIcon from '../images/display_colour.png';
 import bodyStyleIcon from '../../assets/icons/car.svg';
@@ -21,6 +24,7 @@ import nextIcon from '../../assets/icons/noun-next-button-5611387.svg';
 import previousIcon from '../../assets/icons/noun-back-button-251451.svg';
 import sunroofIcon from '../../assets/icons/tabs/noun-car-4372165.svg';
 import heatedSeatIcon from '../../assets/icons/tabs/noun-seat-3355762.svg';
+import {CarListingKeyFeatures, VinDetails, VinIntelligence} from "../../constants/constants";
 
 interface Record {
     vin: string;
@@ -43,56 +47,41 @@ interface Record {
     dealerName: string;
 }
 
-interface VinIntelligence {
-    targetPrice: number;
-    fairPriceHigh: number;
-    fairPriceLow: number;
-    priceLimitHigh: number;
-    priceLimitLow: number;
-}
-
-interface VinDetails {
-    bodyType: string;
-    carfax: string;
-    carfaxOneOwner: string;
-    colorInterior: string;
-    colorExterior: string;
-    condition: string;
-    features: string[];
-    photoUrls: string[];
-    dealerName: string;
-    address: string;
-    phone: string;
-    make: string;
-    model: string;
-    vin: string;
-    year: number;
-    trim: string;
-    price: number;
-    state: string;
-    city: string;
-    mileage: number;
-    overlay: string;
-    primaryPhotoUrl: string;
-    isHot: boolean;
-    recentPriceDrop: boolean;
-}
-
-interface CarListingKeyFeatures {
-    listingId: number;
-    modelId: number;
-    createdAt: string;
-}
 
 const CarDetail: React.FC = () => {
     const {vin} = useParams<{ vin: string }>(); // Access the route parameter 'vin'
     const [record, setRecord] = useState<Record | null>(null);
-    const [activeTab, setActiveTab] = useState<'more-details' | 'specs' | 'others'>('more-details');
+    const [activeTab, setActiveTab] = useState<number>(0);
     const [additionalDetails, setAdditionalDetails] = useState<VinIntelligence | null>(null);
     const [vinDetailsInformation, setVinDetails] = useState<VinDetails | null>(null);
     const [carKeyFeaturesInformation, setCarKeyInfomation] = useState<CarListingKeyFeatures | null>(null);
+    const [impFilteredSpecification, setImpFilteredSpecifications] = useState<any>(null);
 
 
+    const specificationsList = [
+        'Carfax',
+        'Carfax One Owner',
+        'Folding Rear Seat',
+        'Keyless Entry',
+        'Sunroof',
+        'Bluetooth',
+        'Navigation',
+        'Backup Camera',
+        'Power Seats',
+        'Premium Wheels',
+        'Towing',
+        'Leather',
+        'Parking Sensors',
+        'Remote Engine Start',
+        'Satellite Radio',
+        'Security System',
+        'Warranty',
+        'Tinted Windows',
+        'Collision Avoidance System:',
+        'Anti Brake',
+        'Eligible For Financing'
+
+    ];
     useEffect(() => {
         const fetchCarDetails = async () => {
             // Fetch car details from local storage
@@ -132,13 +121,26 @@ const CarDetail: React.FC = () => {
 
         fetchVinDetails();
 
+
         // const {originalData, filteredData} = await carKeyFeatures(vin);
         const fetchCarKeyFeatures = async () => {
             try {
                 const {originalData, filteredData} = await carKeyFeatures(vin);
                 setCarKeyInfomation(filteredData);
                 console.log('Car Features Details:', filteredData);
-                console.log('Original All RAW DATA: ', originalData )
+                console.log('Original All RAW DATA: ', originalData);
+
+                // Ensure filteredData is an object
+                if (typeof filteredData === 'object' && filteredData !== null) {
+                    const impFilteredData = Object.fromEntries(
+                        Object.entries(filteredData)
+                            .filter(([key, value]) => specificationsList.includes(key))
+                    );
+                    setImpFilteredSpecifications(impFilteredData);
+                    console.log('imp>>>', impFilteredData);
+                } else {
+                    console.error('Filtered data is not an object.');
+                }
             } catch (error) {
                 console.error('Error fetching VIN details:', error);
             }
@@ -148,17 +150,24 @@ const CarDetail: React.FC = () => {
     }, [vin]);
 
 
-    const handleTabClick = (tab: 'more-details' | 'specs' | 'others') => {
-        setActiveTab(tab);
-    };
-
-
     if (!vinDetailsInformation) {
         return <div>Loading...</div>;
     }
     const handleCopyVin = () => {
         navigator.clipboard.writeText(vinDetailsInformation?.vin); // Copies the VIN to the clipboard
     };
+
+    const commonKeys = carKeyFeaturesInformation
+        ? Object.keys(carKeyFeaturesInformation).filter(key => specificationsList.includes(key))
+        : [];
+
+    // Calculate the number of features per column
+    const featuresPerColumn = Math.ceil(commonKeys.length / 4);
+
+    // Distribute features evenly across three columns
+    const columns = Array.from({length: 4}, (_, i) =>
+        commonKeys.slice(i * featuresPerColumn, (i + 1) * featuresPerColumn)
+    );
 
     return (
         <div className="details-page">
@@ -254,82 +263,92 @@ const CarDetail: React.FC = () => {
                     </div>
                 </div>
                 <div className="tabs-container">
-                    <div className="tabs">
-                        <button className={`tab ${activeTab === 'more-details' ? 'active' : ''}`}
-                                onClick={() => handleTabClick('more-details')}>More Details
-                        </button>
-                        <button className={`tab ${activeTab === 'specs' ? 'active' : ''}`}
-                                onClick={() => handleTabClick('specs')}>Specs
-                        </button>
-                        <button className={`tab ${activeTab === 'others' ? 'active' : ''}`}
-                                onClick={() => handleTabClick('others')}>Others
-                        </button>
-                    </div>
-                    <div className={`tab-pane ${activeTab === 'more-details' ? 'active' : ''}`}>
-                        <div className="detail-item">
-                            <p className="detail-text">Display Color: {record?.displayColor || 'Not available'}</p>
-                        </div>
-                        <div className="detail-item">
-                            <img src={bodyStyleIcon} alt="Icon" className="detail-icon"/>
-                            <p className="detail-text">Body Style: {record?.bodyStyle}</p>
-                        </div>
-                        <div className="detail-item">
-                            <img src={bodyTypeIcon} alt="Icon" className="detail-icon"/>
-                            <p className="detail-text">Body Type: {record?.bodyType}</p>
-                        </div>
-                        {additionalDetails && (
-                            <div className="detail-item">
-                                <p className="detail-text">Target Price: {additionalDetails.targetPrice}</p>
-                            </div>
-                        )}
-                        {additionalDetails && (
-                            <div className="detail-item">
-                                <p className="detail-text">Fair Price High: {additionalDetails.fairPriceHigh}</p>
-                            </div>
-                        )}
-                        {additionalDetails && (
-                            <div className="detail-item">
-                                <p className="detail-text">Fair Price Low: {additionalDetails.fairPriceLow}</p>
-                            </div>
-                        )}
-                        {additionalDetails && (
-                            <div className="detail-item">
-                                <p className="detail-text">Price Limit High: {additionalDetails.priceLimitHigh}</p>
-                            </div>
-                        )}
-                        {additionalDetails && (
-                            <div className="detail-item">
-                                <p className="detail-text">Price Limit Low: {additionalDetails.priceLimitLow}</p>
-                            </div>
-                        )}
-                    </div>
-                    <div className={`tab-pane ${activeTab === 'specs' ? 'active' : ''}`}>
-                        <div className="specifications">
-                            <div className="spec-column">
-                                {carKeyFeaturesInformation && Object.entries(carKeyFeaturesInformation).slice(0, Math.ceil(Object.entries(carKeyFeaturesInformation).length / 2)).map(([key, value]) => (
-                                    <div key={key} className="spec-item">
-                                        <img src={sunroofIcon} alt="Leather Icon" className="spec-icon"/>
-                                        <p className="spec-label">{key}:</p>
-
+                    <Tabs selectedIndex={activeTab} onSelect={(index: number) => setActiveTab(index)}>
+                        <TabList>
+                            <Tab>More Details</Tab>
+                            <Tab>Specs</Tab>
+                            <Tab>Others</Tab>
+                        </TabList>
+                        {/*</div>*/}
+                        <TabPanel>
+                            <div className="tabs">
+                                <div className="specifications">
+                                    <div className="detail-item">
+                                        <p className="detail-text">Display
+                                            Color: {record?.displayColor || 'Not available'}</p>
                                     </div>
-                                ))}
-                            </div>
-                            <div className="spec-column">
-                                {carKeyFeaturesInformation && Object.entries(carKeyFeaturesInformation).slice(Math.ceil(Object.entries(carKeyFeaturesInformation).length / 2)).map(([key, value]) => (
-                                    <div key={key} className="spec-item">
-                                        <img src={sunroofIcon} alt="Sunroof Icon" className="spec-icon"/>
-                                        <p className="spec-label">{key}:</p>
-
+                                    <div className="detail-item">
+                                        <img src={bodyStyleIcon} alt="Icon" className="detail-icon"/>
+                                        <p className="detail-text">Body Style: {record?.bodyStyle}</p>
                                     </div>
-                                ))}
+                                    <div className="detail-item">
+                                        <img src={bodyTypeIcon} alt="Icon" className="detail-icon"/>
+                                        <p className="detail-text">Body Type: {record?.bodyType}</p>
+                                    </div>
+                                    {additionalDetails && (
+                                        <div className="detail-item">
+                                            <p className="detail-text">Target Price: {additionalDetails.targetPrice}</p>
+                                        </div>
+                                    )}
+                                    {additionalDetails && (
+                                        <div className="detail-item">
+                                            <p className="detail-text">Fair Price
+                                                High: {additionalDetails.fairPriceHigh}</p>
+                                        </div>
+                                    )}
+                                    {additionalDetails && (
+                                        <div className="detail-item">
+                                            <p className="detail-text">Fair Price
+                                                Low: {additionalDetails.fairPriceLow}</p>
+                                        </div>
+                                    )}
+                                    {additionalDetails && (
+                                        <div className="detail-item">
+                                            <p className="detail-text">Price Limit
+                                                High: {additionalDetails.priceLimitHigh}</p>
+                                        </div>
+                                    )}
+                                    {additionalDetails && (
+                                        <div className="detail-item">
+                                            <p className="detail-text">Price Limit
+                                                Low: {additionalDetails.priceLimitLow}</p>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </TabPanel>
+                        <TabPanel>
+                            <div className="tabs">
+                                <div className="specifications">
+                                    {columns.map((column, columnIndex) => (
+                                        <div key={columnIndex} className="spec-column">
+                                            {column.map((spec, index) => (
+                                                <div key={index} className="spec-item">
+                                                    <PhotoIcons
+                                                        specifications={{
+                                                            [spec]: carKeyFeaturesInformation
+                                                                ? carKeyFeaturesInformation[spec as keyof CarListingKeyFeatures]
+                                                                : null
+                                                        }}
+                                                    />
+                                                    {carKeyFeaturesInformation && carKeyFeaturesInformation[spec as keyof CarListingKeyFeatures] && (
+                                                        <p className="spec-value">
+                                                            {carKeyFeaturesInformation[spec as keyof CarListingKeyFeatures]}
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </TabPanel>
+                    </Tabs>
+                    {/*</div>*/}
                 </div>
+
             </div>
         </div>
-    )
-        ;
+    );
 }
-
 export default CarDetail;
